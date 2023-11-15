@@ -77,9 +77,9 @@ export default function Navbar() {
 								</Disclosure.Button>
 							</div>
 							<div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
-								<div className='flex flex-shrink-0 items-center'>
+								<div className='flex flex-shrink-0 items-center text-4xl font-extrabold'>
 									<NavLink href='/' isBanner>
-										CREACRAFT
+										<span className='text-yellow-500'>CREA</span>CRAFT
 									</NavLink>
 								</div>
 								<div className='hidden sm:ml-6 sm:block'>
