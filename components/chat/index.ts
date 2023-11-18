@@ -5,3 +5,5 @@ export { default as Sidebar } from './Sidebar'
 export { default as SidebarContent } from './SidebarContent'
 
 export { TabsProvider, useTabs } from './TabContext'
+
+export { EmptyScreen } from './empty-screen'

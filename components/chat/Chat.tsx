@@ -1,6 +1,6 @@
 'use client'
 
-import { Form, useTabs } from '@/components/chat'
+import { EmptyScreen, Form, useTabs } from '@/components/chat'
 import { useState } from 'react'
 
 export default function Chat() {
@@ -86,20 +86,7 @@ export default function Chat() {
 					aria-labelledby='chat'
 				>
 					<div className='d-flex justify-content-center align-items-center w-full h-full'>
-						{hide ? (
-							<div className='text-center'>
-								<img
-									src='assets/svg/no-chat.svg'
-									className='img-fluid mx-auto'
-									alt='no-chat'
-								/>
-								<h3>
-									{active === 'Ask anything' ? '' : 'Ask'} {active} chatbot
-								</h3>
-							</div>
-						) : (
-							''
-						)}
+						{hide ? <EmptyScreen /> : ''}
 					</div>
 					<div className='' id='chat-container'></div>
 					<Form close={close} className='fixed bottom-0 w-full' />

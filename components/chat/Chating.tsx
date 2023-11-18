@@ -2,7 +2,7 @@ import { Chat, Sidebar, TabsProvider } from '@/components/chat'
 
 export default function Chating() {
 	return (
-		<section className='flex pt-0 h-1/2'>
+		<section className='flex pt-0'>
 			<TabsProvider>
 				<Sidebar />
 				<Chat />
