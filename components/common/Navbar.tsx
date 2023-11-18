@@ -35,6 +35,13 @@ export default function Navbar() {
 			>
 				Dashboard
 			</NavLink>
+			<NavLink
+				isSelected={isSelected('/workflow')}
+				isMobile={isMobile}
+				href='/workflow'
+			>
+				Workflow
+			</NavLink>
 			<NavLink isMobile={isMobile} onClick={handleLogout}>
 				Logout
 			</NavLink>
@@ -61,7 +68,7 @@ export default function Navbar() {
 	)
 
 	return (
-		<Disclosure as='nav' className='bg-gray-800'>
+		<Disclosure as='nav' className='bg-greyblue'>
 			{({ open }) => (
 				<>
 					<div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
