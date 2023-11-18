@@ -12,7 +12,7 @@ export default function Form(close: any) {
 			<button
 				type='submit'
 				className='msger-send-btn ml-2 p-2 bg-blue-500 rounded text-white focus:outline-none'
-				onClick={() => close(e)}
+				onClick={() => close()}
 			>
 				<MdSend className='icon_size' />
 			</button>
