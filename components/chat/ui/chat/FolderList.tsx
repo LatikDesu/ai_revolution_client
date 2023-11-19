@@ -1,12 +1,13 @@
+import { UUID } from 'crypto'
 import React from 'react'
 import FolderButton from './FolderButton'
 
 interface FolderListProps {
 	data: {
-		id: string
+		id: UUID
 		title: string
 		conversations: {
-			id: string
+			id: UUID
 			title: string
 			created_at: string
 		}[]
