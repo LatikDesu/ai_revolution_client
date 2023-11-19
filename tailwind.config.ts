@@ -33,7 +33,7 @@ const config: Config = {
 				darkgrey: '#8A8A8A',
 				dark: '#1b1b1b',
 				light: '#f5f5f5',
-				primary: '#cc460a',
+				primary: '#EE881F',
 				primaryDark: '#58E6D9',
 			},
 		},

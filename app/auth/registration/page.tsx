@@ -4,8 +4,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-	title: 'AI Revolution | Registration',
-	description: 'AI Revolution registration page',
+	title: 'CreaCraft | Регистрация',
+	description: 'Сreate your account on CreaCraft',
 }
 
 export default function Page() {

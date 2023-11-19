@@ -6,6 +6,7 @@ import { logout as setLogout } from '@/redux/features/authSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
@@ -29,21 +30,21 @@ export default function Navbar() {
 	const authLinks = (isMobile: boolean) => (
 		<>
 			<NavLink
-				isSelected={isSelected('/dashboard')}
-				isMobile={isMobile}
-				href='/dashboard'
-			>
-				Dashboard
-			</NavLink>
-			<NavLink
 				isSelected={isSelected('/workflow')}
 				isMobile={isMobile}
 				href='/workflow'
 			>
-				Workflow
+				Рабочее пространство
+			</NavLink>
+			<NavLink
+				isSelected={isSelected('/dashboard')}
+				isMobile={isMobile}
+				href='/dashboard'
+			>
+				Личный кабинет
 			</NavLink>
 			<NavLink isMobile={isMobile} onClick={handleLogout}>
-				Logout
+				Выход
 			</NavLink>
 		</>
 	)
@@ -55,14 +56,14 @@ export default function Navbar() {
 				isMobile={isMobile}
 				href='/auth/login'
 			>
-				Login
+				Вход
 			</NavLink>
 			<NavLink
 				isSelected={isSelected('/auth/register')}
 				isMobile={isMobile}
 				href='/auth/registration'
 			>
-				Registration
+				Регистрация
 			</NavLink>
 		</>
 	)
@@ -71,7 +72,7 @@ export default function Navbar() {
 		<Disclosure as='nav' className='bg-greyblue'>
 			{({ open }) => (
 				<>
-					<div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
+					<div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 items-center justify-center'>
 						<div className='relative flex h-16 items-center justify-between'>
 							<div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
 								<Disclosure.Button className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
@@ -83,14 +84,19 @@ export default function Navbar() {
 									)}
 								</Disclosure.Button>
 							</div>
-							<div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
-								<div className='flex flex-shrink-0 items-center text-4xl font-extrabold'>
+							<div className='flex flex-1 h-81 p-21 items-center justify-center sm:items-stretch sm:justify-start'>
+								<div className='flex flex-shrink-0 items-center justify-center font-extrabold'>
 									<NavLink href='/' isBanner>
-										<span className='text-yellow-500'>CREA</span>CRAFT
+										<Image
+											src='/CREACRAFT.svg'
+											alt='logo'
+											width={134}
+											height={30}
+										/>
 									</NavLink>
 								</div>
-								<div className='hidden sm:ml-6 sm:block'>
-									<div className='flex space-x-4'>
+								<div className='hidden  sm:block sm:ml-auto'>
+									<div className='flex space-x-4 '>
 										{isAuthenticated ? authLinks(false) : guestLinks(false)}
 									</div>
 								</div>
