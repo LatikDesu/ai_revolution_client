@@ -1,14 +1,26 @@
 'use client'
 
-import { EmptyScreen, Form, useTabs } from '@/components/chat'
+import { selectPrompts } from '@/redux/features/prompts/promptsSlice'
+import { useSelector } from 'react-redux'
+
+import { CardGrid } from '@/components/chat/ui'
+
+import {
+	EmptyScreen,
+	Form,
+	PromptsNav,
+	useLinks,
+	useTabs,
+} from '@/components/chat'
 import { useState } from 'react'
 
 export default function Chat() {
+	const prompts = useSelector(selectPrompts)
+
 	const { currentTab, handleTabChange } = useTabs()
+	const { currentLink, handleLinkChange } = useLinks()
 	const [active, setActive] = useState('Ask anything')
 	const [hide, setHide] = useState(true)
-
-	console.log('Current Tab:', currentTab)
 
 	const close = (e: any) => {
 		e.preventDefault()
@@ -59,14 +71,14 @@ export default function Chat() {
 						currentTab === 'notes' ? 'block' : 'hidden'
 					} `}
 				>
-					notes
+					dsdsdsdssd
 				</div>
 				<div
 					className={`p-6 text-base leading-relaxed text-body-color dark:text-dark-6 ${
 						currentTab === 'roles' ? 'block' : 'hidden'
 					} `}
 				>
-					roles
+					<PromptsNav />
 				</div>
 			</div>
 			{/* NAVBAR */}
@@ -80,10 +92,9 @@ export default function Chat() {
 
 				{/* CHAT */}
 				<div
-					className='flex-1 overflow-y-auto p-4 bg-gray-100 active relative'
-					id='chat'
-					role='tabpanel'
-					aria-labelledby='chat'
+					className={`flex-1 overflow-y-auto p-4 bg-gray-100 active relative ${
+						currentLink === 'chat' || currentTab === 'chat' ? 'block' : 'hidden'
+					} `}
 				>
 					<div className='d-flex justify-content-center align-items-center w-full h-full'>
 						{hide ? <EmptyScreen /> : ''}
@@ -91,6 +102,27 @@ export default function Chat() {
 					<div className='' id='chat-container'></div>
 					<Form close={close} className='fixed bottom-0 w-full' />
 				</div>
+
+				<div
+					className={`flex-1 overflow-y-auto p-4 bg-gray-100 active relative ${
+						currentLink === 'systemRoles' && currentTab === 'roles'
+							? 'block'
+							: 'hidden'
+					} `}
+				>
+					<CardGrid data={prompts.systemprompts} />
+				</div>
+
+				<div
+					className={`flex-1 overflow-y-auto p-4 bg-gray-100 active relative ${
+						currentLink === 'userRoles' && currentTab === 'roles'
+							? 'block'
+							: 'hidden'
+					} `}
+				>
+					<CardGrid data={prompts.userprompts} />
+				</div>
+
 				{/* CHAT */}
 			</div>
 		</div>
