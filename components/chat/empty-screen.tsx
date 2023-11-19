@@ -12,8 +12,8 @@ export function EmptyScreen() {
 				</p>
 				<div className='grid grid-cols-2 gap-4 mt-10'>
 					<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-						<div className='text-lg'>Примени новые технологии</div>
-						<div className='text-sm'>
+						<div className='text-base'>Примени новые технологии</div>
+						<div className='text-xs'>
 							в области рекламы продукта. Вы - рекламщик креативного агентства,
 							продвигаете продукт с целью его популяризации. Наименование
 							продукта - шоу-соревнования по спортивным бальным танцам. Выведи в
