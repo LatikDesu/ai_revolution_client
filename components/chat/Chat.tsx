@@ -4,7 +4,7 @@ import { selectChats } from '@/redux/features/conversations/chatSlice'
 import { selectPrompts } from '@/redux/features/prompts/promptsSlice'
 import { useSelector } from 'react-redux'
 
-import { CardGrid, FolderList, MessagesList } from '@/components/chat/ui'
+import { CardGrid, FolderList } from '@/components/chat/ui'
 
 import {
 	EmptyScreen,
@@ -103,9 +103,9 @@ export default function Chat() {
 					<div className='d-flex justify-content-center align-items-center w-full h-full'>
 						{hide ? <EmptyScreen /> : ''}
 					</div>
-					<div className='d-flex justify-content-center align-items-center w-full h-full chat'>
+					{/* <div className='d-flex justify-content-center align-items-center w-full h-full chat'>
 						<MessagesList message={chats.currentChat_messages} />
-					</div>
+					</div> */}
 					<div className='' id='chat-container'></div>
 					<Form close={close} className='fixed bottom-0 w-full' />
 				</div>
