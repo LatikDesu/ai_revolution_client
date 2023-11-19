@@ -6,7 +6,13 @@ import { useSelector } from 'react-redux'
 
 import { CardGrid, FolderList, MessagesList } from '@/components/chat/ui'
 
-import { Form, PromptsNav, useLinks, useTabs } from '@/components/chat'
+import {
+	EmptyScreen,
+	Form,
+	PromptsNav,
+	useLinks,
+	useTabs,
+} from '@/components/chat'
 import { useState } from 'react'
 
 export default function Chat() {
@@ -94,9 +100,9 @@ export default function Chat() {
 						currentLink === 'chat' || currentTab === 'chat' ? 'block' : 'hidden'
 					} `}
 				>
-					{/* <div className='d-flex justify-content-center align-items-center w-full h-full'>
+					<div className='d-flex justify-content-center align-items-center w-full h-full'>
 						{hide ? <EmptyScreen /> : ''}
-					</div> */}
+					</div>
 					<div className='d-flex justify-content-center align-items-center w-full h-full chat'>
 						<MessagesList message={chats.currentChat_messages} />
 					</div>
