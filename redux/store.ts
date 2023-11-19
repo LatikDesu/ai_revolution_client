@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './features/authSlice'
 import promptsSliceReducer from './features/prompts/promptsSlice'
+import chatSliceReducer from './features/conversations/chatSlice'
 import { apiSlice } from './services/apiSlice'
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
 		[apiSlice.reducerPath]: apiSlice.reducer,
 		auth: authReducer,
 		prompts: promptsSliceReducer,
+		chats: chatSliceReducer
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(apiSlice.middleware),

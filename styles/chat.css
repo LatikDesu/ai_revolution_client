@@ -24,6 +24,23 @@
 	flex-direction: column;
 	gap: 10px;
 	padding-bottom: 150px;
+	align-items: flex-start;
+}
+
+.message {
+	margin: 8px;
+	padding: 8px;
+	border-radius: 8px;
+	max-width: 70%;
+}
+
+.user-message {
+	background-color: #e2f0cb; /* Пример цвета для сообщений от пользователя */
+}
+
+.robot-message {
+	background-color: #c2dfff; /* Пример цвета для сообщений от робота */
+	align-self: flex-end; /* Сообщения от робота справа */
 }
 
 .wrapper {
@@ -61,13 +78,13 @@
 	object-fit: contain;
 }
 
-.message {
+/* .message {
 	flex: 1;
 	color: #3bedb2;
 	white-space: pre-wrap;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
-}
+} */
 
 .new_space {
 	padding: 0 1rem;

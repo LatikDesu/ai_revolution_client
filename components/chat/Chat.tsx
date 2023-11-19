@@ -1,21 +1,18 @@
 'use client'
 
+import { selectChats } from '@/redux/features/conversations/chatSlice'
 import { selectPrompts } from '@/redux/features/prompts/promptsSlice'
 import { useSelector } from 'react-redux'
 
-import { CardGrid } from '@/components/chat/ui'
+import { CardGrid, FolderList, MessagesList } from '@/components/chat/ui'
 
-import {
-	EmptyScreen,
-	Form,
-	PromptsNav,
-	useLinks,
-	useTabs,
-} from '@/components/chat'
+import { Form, PromptsNav, useLinks, useTabs } from '@/components/chat'
 import { useState } from 'react'
 
 export default function Chat() {
 	const prompts = useSelector(selectPrompts)
+
+	const chats = useSelector(selectChats)
 
 	const { currentTab, handleTabChange } = useTabs()
 	const { currentLink, handleLinkChange } = useLinks()
@@ -52,7 +49,7 @@ export default function Chat() {
 						currentTab === 'chat' ? 'block' : 'hidden'
 					} `}
 				>
-					<ul id='innerLink'>
+					{/* <ul id='innerLink'>
 						{prooductList.map((item, index) => (
 							<li
 								key={index + 1}
@@ -64,7 +61,8 @@ export default function Chat() {
 								</a>
 							</li>
 						))}
-					</ul>
+					</ul> */}
+					<FolderList data={chats.chatsList} />
 				</div>
 				<div
 					className={`p-6 text-base leading-relaxed text-body-color dark:text-dark-6 ${
@@ -96,8 +94,11 @@ export default function Chat() {
 						currentLink === 'chat' || currentTab === 'chat' ? 'block' : 'hidden'
 					} `}
 				>
-					<div className='d-flex justify-content-center align-items-center w-full h-full'>
+					{/* <div className='d-flex justify-content-center align-items-center w-full h-full'>
 						{hide ? <EmptyScreen /> : ''}
+					</div> */}
+					<div className='d-flex justify-content-center align-items-center w-full h-full chat'>
+						<MessagesList message={chats.currentChat_messages} />
 					</div>
 					<div className='' id='chat-container'></div>
 					<Form close={close} className='fixed bottom-0 w-full' />
