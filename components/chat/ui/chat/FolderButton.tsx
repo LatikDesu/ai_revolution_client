@@ -1,10 +1,11 @@
+import { UUID } from 'crypto'
 import React from 'react'
 import ChatButton from './ChatButton'
 
 interface FolderButtonProps {
 	title: string
 	conversations: {
-		id: string
+		id: UUID
 		title: string
 		created_at: string
 	}[]
