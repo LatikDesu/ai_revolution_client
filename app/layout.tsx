@@ -1,8 +1,7 @@
-import { Footer, Navbar } from '@/components/common'
 import { Setup } from '@/components/utils'
 import Provider from '@/redux/provider'
 import '@/styles/globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Open_Sans } from 'next/font/google'
 
 const openSans = Open_Sans({
@@ -15,6 +14,11 @@ export const metadata: Metadata = {
 	description: 'AI Revolution application',
 }
 
+export const viewport: Viewport = {
+	themeColor: '#394f64',
+	colorScheme: 'light',
+}
+
 export default function RootLayout({
 	children,
 }: {
@@ -25,9 +29,7 @@ export default function RootLayout({
 			<body className={openSans.className}>
 				<Provider>
 					<Setup />
-					<Navbar />
-					<div>{children}</div>
-					<Footer />
+					{children}
 				</Provider>
 			</body>
 		</html>

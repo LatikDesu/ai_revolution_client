@@ -30,9 +30,9 @@ export default function Navbar() {
 	const authLinks = (isMobile: boolean) => (
 		<>
 			<NavLink
-				isSelected={isSelected('/workflow')}
+				isSelected={isSelected('/workspace')}
 				isMobile={isMobile}
-				href='/workflow'
+				href='/workspace'
 			>
 				Рабочее пространство
 			</NavLink>

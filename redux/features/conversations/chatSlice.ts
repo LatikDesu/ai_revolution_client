@@ -12,16 +12,26 @@ interface Message {
 	created_at: string
 }
 
+interface CurrentChat {
+	id: UUID
+	title: string
+	model: string
+	temperature: number
+	tokenLimit: number
+	maxLength: number
+	updated_at: string
+	prompt: string
+	messages: Message[]
+}
+
 interface ChatsState {
 	chatsList: []
-	currentChat_id: UUID | null
-	currentChat_messages: Message[]
+	currentChat: {}
 }
 
 const initialState: ChatsState = {
 	chatsList: [],
-	currentChat_id: null,
-	currentChat_messages: [],
+	currentChat: {},
 }
 
 const chatSlice = createSlice({
@@ -31,21 +41,17 @@ const chatSlice = createSlice({
 		getChatList: (state, action) => {
 			state.chatsList = action.payload.results
 		},
-		setCurrentChat: (state, action) => {
-			state.currentChat_id = action.payload
-		},
-		setCurrentChatMessages: (
+		setCurrentChat: (
 			state,
-			action: PayloadAction<{ results: Message[] }>
+			action: PayloadAction<{ results: CurrentChat }>
 		) => {
-			state.currentChat_messages = action.payload.results
+			state.currentChat = action.payload.results
 		},
 	},
 })
 
 export const selectChats = (state: RootState) => state.chats
 
-export const { getChatList, setCurrentChat, setCurrentChatMessages } =
-	chatSlice.actions
+export const { getChatList, setCurrentChat } = chatSlice.actions
 
 export default chatSlice.reducer

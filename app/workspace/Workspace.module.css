@@ -1,0 +1,9 @@
+.layout {
+	height: 100%;
+	width: 100%;
+	color: white;
+	background: linear-gradient(to top right, #180d35, #36174f);
+	display: grid;
+	grid-template-columns: 1fr 20fr;
+	min-height: 100vh;
+}

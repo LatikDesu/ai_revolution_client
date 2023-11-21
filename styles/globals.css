@@ -3,3 +3,34 @@
 @tailwind utilities;
 
 @import './chat.css';
+
+html,
+body {
+	height: 100%;
+}
+
+input:-webkit-autofill {
+	transition-delay: 9999s;
+	-webkit-transition-property: background-color;
+	transition-property: background-color;
+}
+
+.animation-slide-fade {
+	animation: slideFade 0.7s;
+}
+
+.animation-slide-fade:hover {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@keyframes slideFade {
+	from {
+		transform: translateY(-22px);
+		opacity: 0.4;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}

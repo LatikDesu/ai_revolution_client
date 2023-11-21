@@ -1,14 +1,16 @@
+import { Footer, Navbar } from '@/components/common'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-	title: 'AI Revolution | Home',
-	description: 'AI Revolution home page',
+	title: 'CreaCraft | Умный помощник для эффективной работы',
+	description: 'CreaCraft | ChatGPT assistant',
 }
 
 export default function Page() {
 	return (
 		<main className='bg-white'>
+			<Navbar />
 			<div className='relative isolate px-6 pt-14 lg:px-8'>
 				<div className='mx-auto max-w-2xl py-32 sm:py-48 lg:py-56'>
 					<div className='text-center'>
@@ -38,6 +40,7 @@ export default function Page() {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</main>
 	)
 }

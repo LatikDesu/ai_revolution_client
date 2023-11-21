@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import {
-	useGetFoldersListQuery,
+	useGetChatListQuery,
 } from '@/redux/features/conversations/chatApiSlice'
 
 import {
@@ -13,14 +13,14 @@ import { useAppDispatch } from '@/redux/hooks'
 function useChatsList() {
 	const dispatch = useAppDispatch()
 
-	const { data: chatsList } = useGetFoldersListQuery()
+	const { data: chatsList } = useGetChatListQuery()
 
 	useEffect(() => {
 		if (chatsList) {
 			dispatch(getChatList({ results: chatsList }))
 		}
 
-	}, [chatsList, , dispatch])
+	}, [chatsList, dispatch])
 }
 
 export default useChatsList

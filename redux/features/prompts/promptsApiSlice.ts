@@ -15,6 +15,7 @@ interface ApiResponse {
 }
 
 interface UpdatePromptArgs {
+	id: any
 	title?: string
 	description?: string
 	prompt?: string
@@ -37,7 +38,7 @@ export const promptsApiSlice = apiSlice.injectEndpoints({
 		}),
 		updateUserPrompt: builder.mutation<Prompt, UpdatePromptArgs>({
 			query: (args) => ({
-				url: '/prompts/userprompts/${args.id}/',
+				url: `/prompts/userprompts/${args.id}/`,
 				method: 'PATCH',
 				body: args,
 			}),
