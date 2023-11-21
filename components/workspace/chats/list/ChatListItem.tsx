@@ -2,6 +2,7 @@
 
 import { IChat } from '@/types/chat.types'
 import dayjs from 'dayjs'
+import calendar from 'dayjs/plugin/calendar'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -10,8 +11,10 @@ interface IChatListItem {
 }
 
 export default function ChatListItem({ chat }: IChatListItem) {
+	dayjs.extend(calendar)
+
 	const isActive = usePathname() === `/workspace/chat/${chat.id}`
-	console.log(usePathname())
+	console.log(dayjs.locale())
 
 	return (
 		<Link
@@ -23,7 +26,12 @@ export default function ChatListItem({ chat }: IChatListItem) {
 			<div className='text-sm w-full'>
 				<div className='flex items-center justify-between'>
 					<span>{chat?.title}</span>
-					{dayjs(chat?.updated_at).format('HH:mm')}
+					{dayjs(chat?.updated_at).calendar(null, {
+						sameDay: '[Сегодня в] HH:MM',
+						lastDay: '[Вчера в] HH:mm',
+						lastWeek: 'DD/MM/YYYY',
+						sameElse: 'DD/MM/YYYY',
+					})}
 				</div>
 			</div>
 		</Link>
