@@ -1,10 +1,5 @@
 'use client'
-import {
-	ChatHeader,
-	Loader,
-	Message,
-	MessageField,
-} from '@/components/workspace/index'
+import { Loader, Message, MessageField } from '@/components/workspace/index'
 import { useGetMessageListQuery } from '@/redux/features/conversations/chatApiSlice'
 import { RootState } from '@/redux/store'
 import { UUID } from 'crypto'
@@ -40,9 +35,9 @@ export default function Chat({ id }: { id: UUID }) {
 
 	return (
 		<div
-			className=' border-r border-grey h-full grid'
+			className=' border-r border-darkgrey h-full grid bg-white'
 			style={{
-				gridTemplateRows: isLoading ? '1fr .089fr' : '.6fr 6fr .6fr',
+				gridTemplateRows: isLoading ? '1fr .089fr' : '6fr .6fr',
 			}}
 		>
 			{isLoading ? (
@@ -51,11 +46,11 @@ export default function Chat({ id }: { id: UUID }) {
 				</div>
 			) : (
 				<>
-					<ChatHeader title={messagesList?.title} />
+					{/* <ChatHeader title={messagesList?.title} /> */}
 					<div
 						ref={messagesContainerRef}
-						className='p-4 border-t border-grey'
-						style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 200px)' }}
+						className='p-4 border-t border-darkgrey'
+						style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 120px)' }}
 					>
 						{messagesList?.messages.map((message) => (
 							<Message key={message.id} message={message} />

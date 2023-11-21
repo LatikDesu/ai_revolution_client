@@ -28,7 +28,7 @@ export default function MessageField() {
 	}
 
 	return (
-		<div className='border-t border-grey p-4 flex items-center justify-between'>
+		<div className='border-t border-darkgrey p-4 flex items-center justify-between text-black'>
 			<Field
 				placeholder='Write a message...'
 				Icon={ArrowRightToLine}
@@ -42,9 +42,11 @@ export default function MessageField() {
 			<button
 				onClick={onSubmit}
 				disabled={!message || isLoading}
-				className='hover:text-primary transition-colors'
+				className='hover:text-primary transition-colors pr-4'
 			>
-				{(isLoading && <Loader />) || <Send />}
+				{(isLoading && <Loader />) || (
+					<Send size={36} className='text-primary' />
+				)}
 			</button>
 		</div>
 	)

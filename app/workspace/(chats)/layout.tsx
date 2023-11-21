@@ -4,15 +4,15 @@ import { type PropsWithChildren } from 'react'
 export default function ChatLayout({ children }: PropsWithChildren<unknown>) {
 	return (
 		<div
-			className='grid h-full'
+			className='grid h-full bg-greyblue bg-opacity-90'
 			style={{
-				gridTemplateColumns: '.7fr 3fr',
+				gridTemplateColumns: '.8fr 3fr',
 			}}
 		>
-			<div className='border-r-[1px] border-grey'>
+			<div className='border-r-[1px] border-darkgrey'>
 				<ChatsList />
 			</div>
-			<div>{children}</div>
+			{children}
 		</div>
 	)
 }

@@ -3,7 +3,8 @@
 	align-items: center;
 	flex-direction: column;
 	justify-content: space-between;
-	border-right: 1px solid #7c7275;
+	background-color: #2e2d8c;
+	border-right: 1px solid #bababa;
 }
 
 .sidebar a {
@@ -13,16 +14,14 @@
 }
 
 .sidebar a.active > svg {
-	color: white;
+	color: #ee881f;
 }
 
 .sidebar svg {
-	color: #7c7275;
+	color: #bababa;
 	transition: color 300ms ease-in-out;
 }
 
 .sidebar svg:hover {
-	color: white;
+	color: #ee881f;
 }
-
-

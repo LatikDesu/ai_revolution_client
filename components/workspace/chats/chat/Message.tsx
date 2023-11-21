@@ -23,7 +23,7 @@ export default function Message({ message }: { message: IMessage }) {
 				/>
 				<div className={isSender ? 'mr-3' : 'ml-3'}>
 					<div
-						className={`text-sm text-white py-1.5 mt-4 px-3 rounded-2xl ${
+						className={`text-sm text-black py-1.5 mt-4 px-3 rounded-2xl ${
 							isSender
 								? 'rounded-tr-none bg-primary'
 								: 'rounded-tl-none bg-border'

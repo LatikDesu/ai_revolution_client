@@ -30,8 +30,8 @@ const config: Config = {
 			},
 			colors: {
 				grey: '#7c7275',
-				greyblue: '#394F64',
-				darkgrey: '#8A8A8A',
+				greyblue: '#2E2D8C',
+				darkgrey: '#bababa',
 				dark: '#1b1b1b',
 				light: '#f5f5f5',
 				primary: '#EE881F',

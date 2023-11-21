@@ -25,7 +25,7 @@ export default function ChatsList() {
 
 	return (
 		<div>
-			<div className='border-t border-b border-border'>
+			<div className='border-b border-darkgrey '>
 				<Field
 					placeholder='Search chats'
 					Icon={Search}
@@ -35,7 +35,7 @@ export default function ChatsList() {
 			</div>
 			<div>
 				{isLoading || isFetching ? (
-					<div className='p-layout'>
+					<div className='p-4'>
 						<Loader />
 					</div>
 				) : (
