@@ -37,7 +37,7 @@ export default function MessageField() {
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') onSubmit()
 				}}
-				className='w-4/5'
+				className='w-full'
 			/>
 			<button
 				onClick={onSubmit}

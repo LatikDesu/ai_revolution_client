@@ -1,5 +1,5 @@
 import { LucideIcon } from 'lucide-react'
-import { InputHTMLAttributes } from 'react'
+import { TextareaHTMLAttributes  } from 'react'
 import { FieldError } from 'react-hook-form'
 
 export interface IFieldProps {
@@ -8,4 +8,4 @@ export interface IFieldProps {
 	Icon?: LucideIcon
 }
 
-export type TypeInputProps = InputHTMLAttributes<HTMLInputElement> & IFieldProps
+export type TypeInputProps = TextareaHTMLAttributes <HTMLTextAreaElement> & IFieldProps

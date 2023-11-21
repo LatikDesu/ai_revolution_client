@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 import styles from './Field.module.css'
 import { TypeInputProps } from './field.types'
 
-const Field = forwardRef<HTMLInputElement, TypeInputProps>(
+const Field = forwardRef<HTMLTextAreaElement, TypeInputProps>(
 	({ error, style, Icon, className, ...rest }, ref) => {
 		return (
 			<label className={cn(styles.field, className)} style={style}>
@@ -13,7 +13,7 @@ const Field = forwardRef<HTMLInputElement, TypeInputProps>(
 						<Icon />
 					</div>
 				)}
-				<input ref={ref} {...rest} />
+				<textarea ref={ref} {...rest} />
 				{error && <div className={styles.error}>{error.message}</div>}
 			</label>
 		)
