@@ -1,21 +1,10 @@
 import { UUID } from 'crypto'
 import { apiSlice } from '../../services/apiSlice'
 
-interface Folder {
-	id: UUID
-	title: string
-	conversations: ConversationFolder[]
-}
-
-interface ConversationFolder {
-	id: UUID
-	title: string
-	created_at: string
-}
-
 interface Chat {
 	id: UUID
 	title: string
+	model: string
 	prompt: string
 	updated_at: string
 }
@@ -50,31 +39,32 @@ interface messagesListApiResponse {
 
 export const chatApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getFoldersList: builder.query<Folder, void>({
-			query: () => '/conversations/folders/list/',
-		}),
-		createFolder: builder.mutation({
-			query: ({ title }) => ({
-				url: '/conversations/folders/create/',
-				method: 'POST',
-				body: { title },
-			}),
-		}),
-		updateFolder: builder.mutation({
-			query: ({ id, title }) => ({
-				url: `/conversations/folders/${id}/title/`,
-				method: 'PATCH',
-				body: { title },
-			}),
-		}),
-		deleteFolder: builder.mutation<void, { id: UUID | null }>({
-			query: ({ id }) => ({
-				url: `/conversations/folders/${id}/delete/`,
-				method: 'DELETE',
-			}),
-		}),
 		getChatList: builder.query<ChatApiResponse, void>({
 			query: () => '/conversations/',
+			providesTags: [{ type: 'Chat', id: 'LIST' }],
+		}),
+		createChat: builder.mutation<Chat, Partial<Chat>>({
+			query: (newChatData) => ({
+				url: '/conversations/',
+				method: 'POST',
+				body: newChatData,
+			}),
+			invalidatesTags: [{ type: 'Chat', id: 'LIST' }],
+		}),
+		deleteChat: builder.mutation<{ success: boolean; id: UUID }, UUID>({
+			query: (id) => ({
+				url: `/conversations/${id}/delete/`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: [{ type: 'Chat', id: 'LIST' }],
+		}),
+		configChat: builder.mutation<void, Partial<Chat>>({
+			query: (config) => ({
+				url: `/conversations/${config.id}/config/`,
+				method: 'PATCH',
+				body: config,
+			}),
+			invalidatesTags: [{ type: 'Chat', id: 'LIST' }],
 		}),
 		getMessageList: builder.query<messagesListApiResponse, { id: UUID | null }>(
 			{
@@ -92,11 +82,10 @@ export const chatApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-	useGetFoldersListQuery,
 	useGetChatListQuery,
+	useCreateChatMutation,
+	useConfigChatMutation,
+	useDeleteChatMutation,
 	useSendMessageMutation,
-	useCreateFolderMutation,
-	useUpdateFolderMutation,
-	useDeleteFolderMutation,
 	useGetMessageListQuery,
 } = chatApiSlice

@@ -1,4 +1,3 @@
-import { Navbar } from '@/components/common'
 import { Setup } from '@/components/utils'
 import Provider from '@/redux/provider'
 import '@/styles/globals.css'

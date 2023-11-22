@@ -34,3 +34,18 @@ input:-webkit-autofill {
 		opacity: 1;
 	}
 }
+
+.chatsContainer::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Стилизация ползунка прокрутки */
+.chatsContainer::-webkit-scrollbar-thumb {
+	background-color: #2e2d8c;
+	border-radius: 4px;
+}
+
+/* Стилизация трека прокрутки */
+.chatsContainer::-webkit-scrollbar-track {
+	background-color: #bababa;
+}

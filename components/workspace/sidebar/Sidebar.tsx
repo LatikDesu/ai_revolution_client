@@ -15,11 +15,12 @@ export default function Sidebar() {
 	return (
 		<aside className={styles.sidebar}>
 			<Image
-				src='/mascot_logo.png'
+				src='/mini_logo.svg'
 				priority
 				width={75}
 				height={75}
 				alt='logo'
+				className='pt-4'
 			/>
 			<div>
 				{MENU.map((item) => (

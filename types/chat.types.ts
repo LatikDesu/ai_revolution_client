@@ -12,6 +12,7 @@ export interface IMessage {
 export interface IChat {
 	id: UUID
 	title: string
+	model: string
 	prompt: string
 	updated_at: string
 }

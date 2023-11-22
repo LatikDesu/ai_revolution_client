@@ -2,6 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { UUID } from 'crypto'
 import type { RootState } from '../../store'
+import { logout as logoutAction } from '../authSlice'
+
+interface Chat {
+	id: UUID
+	model: string
+	title: string
+	prompt: string
+	updated_at: string
+}
 
 interface Message {
 	id: UUID
@@ -25,21 +34,27 @@ interface CurrentChat {
 }
 
 interface ChatsState {
-	chatsList: []
-	currentChat: {}
+	chatsList: Chat[]
+	currentChat?: CurrentChat
 }
 
 const initialState: ChatsState = {
 	chatsList: [],
-	currentChat: {},
+	currentChat: undefined,
 }
 
 const chatSlice = createSlice({
 	name: 'chats',
 	initialState,
 	reducers: {
-		getChatList: (state, action) => {
-			state.chatsList = action.payload.results
+		getChatList: (state, action: PayloadAction<Chat[]>) => {
+			state.chatsList = action.payload
+		},
+		clearChats: (state) => {
+			state.chatsList = []
+		},
+		addChat: (state, action: PayloadAction<Chat>) => {
+			state.chatsList.push(action.payload)
 		},
 		setCurrentChat: (
 			state,
@@ -48,10 +63,16 @@ const chatSlice = createSlice({
 			state.currentChat = action.payload.results
 		},
 	},
+	extraReducers: (builder) => {
+		builder.addCase(logoutAction, (state) => {
+			state.chatsList = []
+		})
+	},
 })
 
-export const selectChats = (state: RootState) => state.chats
+export const selectChats = (state: RootState) => state.chats.chatsList
+export const selectCurrentChat = (state: RootState) => state.chats.currentChat
 
-export const { getChatList, setCurrentChat } = chatSlice.actions
+export const { getChatList, addChat, setCurrentChat } = chatSlice.actions
 
 export default chatSlice.reducer
