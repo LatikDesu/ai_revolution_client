@@ -16,7 +16,7 @@ export function Background() {
 			fill
 			sizes='80vw'
 			style={{
-				objectFit: 'fill',
+				objectFit: 'cover',
 			}}
 		/>
 	)
