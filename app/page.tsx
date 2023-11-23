@@ -1,5 +1,8 @@
-import { Footer, Navbar } from '@/components/common'
+import { Layout, Navbar } from '@/components/screens/landing'
+import styles from '@/components/screens/landing/Landing.module.css'
+import { AnimatedText, TransitionEffect } from '@/components/utils'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -9,9 +12,53 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<main className='bg-white'>
+		<main className={`w-full min-h-screen ${styles.container}`}>
+			<TransitionEffect />
 			<Navbar />
-			<div className='relative isolate px-6 pt-14 lg:px-8'>
+			<section className='flex items-center text-white w-full min-h-screen'>
+				<Layout className='pt-0 md:pt-16 sm:pt-8'>
+					<div className='flex items-center justify-between w-full lg:flex-col'>
+						<div className='w-1/2 flex flex-col items-start self-center lg:items-center lg:w-full lg:text-center'>
+							<AnimatedText
+								text='CREACRAFT ВАШ КРЕАТИВНЫЙ ПОМОЩНИК'
+								className='!text-6xl !text-left xl: !text-5xl lg:!text-center lg:!text-6xl md:!text-5xl sm:!text-3xl'
+							/>
+							<p className='my-4 text-base font-medium md:text-sm sm:text-xs'>
+								Генерируй статьи, рекламные креативы и многое другое с нуля
+							</p>
+							<div className='flex items-center self-start mt-2 lg:self-center'>
+								<Link
+									href='/login'
+									className='flex items-center bg-baseorange text-light p-2.5 px-6
+                         rounded-lg text-lg font-semibold hover:bg-light hover:baseorange
+                         border-2 border-solid border-transparent hover:baseorange md:p-2 md:px-4 md:text-base'
+								>
+									Начать
+								</Link>
+							</div>
+						</div>
+						<div className='w-1/2 md:w-full'>
+							<Image
+								width={300}
+								height={300}
+								src='/MainPic.png'
+								alt='PromoPic'
+								className='w-full h-auto lg:hidden md:inline-block md:w-full'
+								priority
+								sizes='(max-width: 768px) 100vw,
+                    (max-width: 1200px) 50vw,
+                    33vw'
+							/>
+						</div>
+					</div>
+				</Layout>
+			</section>
+		</main>
+	)
+}
+
+{
+	/* <div className='relative isolate px-6 pt-14 lg:px-8'>
 				<div className='mx-auto max-w-2xl py-32 sm:py-48 lg:py-56'>
 					<div className='text-center'>
 						<h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
@@ -39,8 +86,5 @@ export default function Page() {
 						</div>
 					</div>
 				</div>
-			</div>
-			<Footer />
-		</main>
-	)
+			</div> */
 }

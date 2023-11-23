@@ -1,12 +1,19 @@
 import { Setup } from '@/components/utils'
 import Provider from '@/redux/provider'
 import '@/styles/globals.css'
+
 import type { Metadata, Viewport } from 'next'
-import { Open_Sans } from 'next/font/google'
+import { Bebas_Neue, Open_Sans } from 'next/font/google'
 
 const openSans = Open_Sans({
 	subsets: ['latin'],
 	display: 'swap',
+	variable: '--font-open',
+})
+const bebaNeue = Bebas_Neue({
+	subsets: ['latin'],
+	weight: '400',
+	variable: '--font-beba',
 })
 
 export const metadata: Metadata = {
@@ -15,7 +22,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-	themeColor: '#394f64',
+	themeColor: '#001324',
 	colorScheme: 'light',
 }
 
@@ -25,8 +32,8 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang='en'>
-			<body className={openSans.className}>
+		<html lang='ru'>
+			<body className={`${openSans.variable} ${bebaNeue.variable}`}>
 				<Provider>
 					<Setup />
 					{children}
