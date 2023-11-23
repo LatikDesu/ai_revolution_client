@@ -34,12 +34,12 @@ export default function Navbar() {
 			<CustomLink
 				href='/workspace'
 				title='Рабочее пространство'
-				className='mr-8'
+				className={isMobile ? '' : 'mr-8'}
 			/>
 			<CustomLink
 				title='Выход'
 				onClick={handleLogout}
-				className={`${isOpen} ? '':'ml-10'`}
+				className={isMobile ? '' : 'ml-10'}
 			/>
 		</>
 	)
@@ -48,13 +48,13 @@ export default function Navbar() {
 		<>
 			<CustomLink
 				href='/auth/login'
-				title='Войти'
-				className={`${isOpen} ? '':'mr-8'`}
+				title='Вход'
+				className={isMobile ? '' : 'mr-8'}
 			/>
 			<CustomLink
 				href='/auth/registration'
 				title='Зарегистрироваться'
-				className='ml-10'
+				className={isMobile ? '' : 'ml-10'}
 			/>
 		</>
 	)
@@ -88,7 +88,7 @@ export default function Navbar() {
 					<Image src='/CREACRAFT.svg' alt='logo' width={134} height={30} />
 				</Link>
 				<nav className='flex items-center justify-center flex-wrap'>
-					{isAuthenticated ? authLinks(true) : guestLinks(true)}
+					{isAuthenticated ? authLinks(false) : guestLinks(false)}
 				</nav>
 			</div>
 

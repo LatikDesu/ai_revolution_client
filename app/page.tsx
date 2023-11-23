@@ -23,7 +23,7 @@ export default function Page() {
 						<div className='w-1/2 flex flex-col items-start self-center lg:items-center lg:w-full lg:text-center'>
 							<AnimatedText
 								text='CREACRAFT ВАШ КРЕАТИВНЫЙ ПОМОЩНИК'
-								className='!text-6xl !text-left xl: !text-5xl lg:!text-center lg:!text-6xl md:!text-5xl sm:!text-3xl'
+								className='!text-6xl !text-left xl: !text-5xl !font-beba lg:!text-center lg:!text-6xl md:!text-5xl sm:!text-3xl'
 							/>
 							<p className='my-4 text-base font-medium md:text-sm sm:text-xs'>
 								Генерируй статьи, рекламные креативы и многое другое с нуля

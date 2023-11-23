@@ -39,7 +39,7 @@ const AnimatedText: FC<AnimatedTextProps> = ({ text, className = '' }) => {
 		<AnimatePresence mode='wait'>
 			<div className='w-full mx-auto py-2 flex items-center justify-center text-center overflow-hidden sm:py-0'>
 				<motion.h1
-					className={`inline-block w-full text-white text-7xl  !font-beba  ${className}`}
+					className={`inline-block w-full text-white   ${className}`}
 					variants={quote}
 					initial='initial'
 					animate='animate'
