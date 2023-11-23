@@ -10,9 +10,26 @@ export const metadata: Metadata = {
 	description: 'CreaCraft | ChatGPT assistant',
 }
 
+export function Background() {
+	return (
+		<Image
+			alt='Mountains'
+			src='/background.png'
+			priority
+			quality={100}
+			fill
+			sizes='100vw'
+			style={{
+				objectFit: 'cover',
+			}}
+		/>
+	)
+}
+
 export default function Page() {
 	return (
 		<main className={`w-full min-h-screen ${styles.container}`}>
+			<Background />
 			<TransitionEffect />
 			<Navbar />
 			<section className='flex items-center text-white w-full min-h-screen'>
@@ -39,15 +56,13 @@ export default function Page() {
 						</div>
 						<div className='w-1/2 md:w-full'>
 							<Image
-								width={300}
-								height={300}
+								width={600}
+								height={600}
 								src='/MainPic.png'
 								alt='PromoPic'
+								sizes='100vw'
 								className='w-full h-auto lg:hidden md:inline-block md:w-full'
 								priority
-								sizes='(max-width: 768px) 100vw,
-                    (max-width: 1200px) 50vw,
-                    33vw'
 							/>
 						</div>
 					</div>
