@@ -1,5 +1,4 @@
 import { Layout, Navbar } from '@/components/screens/landing'
-import styles from '@/components/screens/landing/Landing.module.css'
 import { AnimatedText, TransitionEffect } from '@/components/utils'
 import type { Metadata } from 'next'
 import Image from 'next/image'
@@ -10,26 +9,12 @@ export const metadata: Metadata = {
 	description: 'CreaCraft | ChatGPT assistant',
 }
 
-export function Background() {
-	return (
-		<Image
-			alt='Mountains'
-			src='/background.png'
-			priority
-			quality={100}
-			fill
-			sizes='100vw'
-			style={{
-				objectFit: 'cover',
-			}}
-		/>
-	)
-}
-
 export default function Page() {
 	return (
-		<main className={`w-full min-h-screen ${styles.container}`}>
-			<Background />
+		<main
+			className='w-full min-h-full'
+			style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 100px)' }}
+		>
 			<TransitionEffect />
 			<Navbar />
 			<section className='flex items-center text-white w-full min-h-screen'>
