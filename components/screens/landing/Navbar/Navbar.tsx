@@ -53,7 +53,7 @@ export default function Navbar() {
 			/>
 			<CustomLink
 				href='/auth/registration'
-				title='Зарегистрироваться'
+				title='Регистрация'
 				className={isMobile ? '' : 'ml-10'}
 			/>
 		</>
