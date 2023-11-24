@@ -48,12 +48,12 @@ export default function Navbar() {
 		<>
 			<CustomLink
 				href='/auth/login'
-				title='Вход'
+				title='Войти'
 				className={isMobile ? '' : 'mr-8'}
 			/>
 			<CustomLink
 				href='/auth/registration'
-				title='Регистрация'
+				title='Зарегистрироваться'
 				className={isMobile ? '' : 'ml-10'}
 			/>
 		</>
