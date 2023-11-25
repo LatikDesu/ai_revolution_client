@@ -1,7 +1,6 @@
-import { SocialButtons } from '@/components/common'
-import { RegisterForm } from '@/components/forms'
+import { RegFormPage } from '@/components/screens/auth'
+import { Layout } from '@/components/screens/landing'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
 	title: 'CreaCraft | Регистрация',
@@ -10,32 +9,33 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
-			<div className='sm:mx-auto sm:w-full sm:max-w-sm'>
-				<img
-					className='mx-auto h-10 w-auto'
-					src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-					alt='AI Revolution logo'
-				/>
-				<h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
-					Регистрация
-				</h2>
-			</div>
-
-			<div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-				<RegisterForm />
-				<SocialButtons />
-
-				<p className='mt-10 text-center text-sm text-gray-500'>
-					Уже есть аккаунт?{' '}
-					<Link
-						href='/auth/login'
-						className='font-semibold leading-6 text-indigo-600 hover:text-indigo-500'
+		<main
+			className='flex items-center text-white w-full min-h-screen'
+			style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 100px)' }}
+		>
+			<Layout className='pt-0 md:pt-16 sm:pt-8'>
+				<div
+					className='grid grid-cols-2  md:grid-cols-1 md:gap-y-8 rounded-2xl shadow-2xl items-center text-center shadow-basecyan
+                    '
+				>
+					<div
+						className='bg-basecolor text-light rounded-tl-2xl rounded-bl-2xl py-36 px-12 md:py-12 md:px-8 h-full
+                    md:rounded-tr-none md:rounded-bl-2xl'
 					>
-						Войти
-					</Link>
-				</p>
-			</div>
-		</div>
+						<h2 className='text-3xl font-bold mb-2'>Приветсвую!</h2>
+						<div className='border-2 w-10 border-light inline-block mb-2'></div>
+						<p className='mb-10'>
+							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio
+							quos, esse minus ab error impedit enim amet asperiores
+							reprehenderit exercitationem culpa inventore veritatis laboriosam,
+							quae ad assumenda tempora illo deleniti.
+						</p>
+					</div>
+					<div className='px-5 w-full h-full bg-white rounded-tr-2xl rounded-br-2xl'>
+						<RegFormPage />
+					</div>
+				</div>
+			</Layout>
+		</main>
 	)
 }

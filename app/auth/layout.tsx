@@ -1,4 +1,5 @@
-import { Footer, Navbar } from '@/components/common'
+import { Navbar } from '@/components/screens/landing'
+import { TransitionEffect } from '@/components/utils'
 
 interface Props {
 	children: React.ReactNode
@@ -6,10 +7,10 @@ interface Props {
 
 export default function Layout({ children }: Props) {
 	return (
-		<section>
+		<section className='w-full min-h-full bg-basecolor'>
+			<TransitionEffect />
 			<Navbar />
-			<div>{children}</div>
-			<Footer />
+			{children}
 		</section>
 	)
 }
