@@ -2,7 +2,6 @@
 
 import { Field, Loader } from '@/components/workspace/index'
 import { useSendMessageMutation } from '@/redux/features/conversations/chatApiSlice'
-import { updateComponent } from '@/redux/features/updateReducer'
 import { useAppDispatch } from '@/redux/hooks'
 import { ArrowRightToLine, Send } from 'lucide-react'
 import { useParams } from 'next/navigation'
@@ -19,9 +18,8 @@ export default function MessageField() {
 		if (!message || isLoading) return
 
 		try {
-			await sendMessage({ id, content: message, regenerate: false })
+			await sendMessage({ id, content: message, stream: false }).unwrap()
 			setMessage('')
-			dispatch(updateComponent())
 		} catch (error) {
 			console.error('Error sending message:', error)
 		}

@@ -8,6 +8,5 @@ export { default as ChatListItem } from './chats/list/ChatListItem'
 export { default as ChatsList } from './chats/list/ChatsList'
 
 export { default as Chat } from './chats/chat/Chat'
-export { default as ChatHeader } from './chats/chat/ChatHeader'
 export { default as Message } from './chats/chat/Message'
 export { default as MessageField } from './chats/chat/MessageField'

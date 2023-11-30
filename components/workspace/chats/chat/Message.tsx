@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 
 export default function Message({ message }: { message: IMessage }) {
-	const isSender = message.is_from_user
+	const isSender = message.isFromUser
 
 	return (
 		<div
@@ -36,7 +36,7 @@ export default function Message({ message }: { message: IMessage }) {
 							isSender ? 'text-right' : 'text-left'
 						}`}
 					>
-						{dayjs(message.created_at).format('HH:mm')}
+						{dayjs(message.createdAt).format('HH:mm')}
 					</div>
 				</div>
 			</div>

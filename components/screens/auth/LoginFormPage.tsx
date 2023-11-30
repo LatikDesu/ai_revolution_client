@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function LoginFormPage() {
 	return (
-		<div className='flex min-h-full flex-1 flex-col justify-center '>
+		<div className='flex min-h-full flex-1 flex-col justify-center'>
 			<div className=''>
 				<h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
 					Войдите в свой аккаунт

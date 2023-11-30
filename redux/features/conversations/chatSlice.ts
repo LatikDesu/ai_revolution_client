@@ -9,16 +9,16 @@ interface Chat {
 	model: string
 	title: string
 	prompt: string
-	updated_at: string
+	updatedAt: string
 }
 
 interface Message {
 	id: UUID
 	conversation: any
 	content: string
-	is_from_user: boolean
-	in_reply_to: any
-	created_at: string
+	isFromUser: boolean
+	inReplyTo: any
+	createdAt: string
 }
 
 interface CurrentChat {
@@ -26,9 +26,7 @@ interface CurrentChat {
 	title: string
 	model: string
 	temperature: number
-	tokenLimit: number
 	maxLength: number
-	updated_at: string
 	prompt: string
 	messages: Message[]
 }
@@ -58,9 +56,9 @@ const chatSlice = createSlice({
 		},
 		setCurrentChat: (
 			state,
-			action: PayloadAction<{ results: CurrentChat }>
+			action: PayloadAction<CurrentChat>
 		) => {
-			state.currentChat = action.payload.results
+			state.currentChat = action.payload
 		},
 	},
 	extraReducers: (builder) => {

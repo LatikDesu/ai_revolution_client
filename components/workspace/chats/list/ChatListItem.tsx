@@ -131,7 +131,7 @@ export default function ChatListItem({ chat }: IChatListItem) {
 					) : (
 						<div className='flex'>{chat?.title}</div>
 					)}
-					{dayjs(chat?.updated_at).calendar(null, {
+					{dayjs(chat?.updatedAt).calendar(null, {
 						sameDay: '[Сегодня в] HH:mm',
 						lastDay: '[Вчера в] HH:mm',
 						lastWeek: 'DD/MM/YYYY',

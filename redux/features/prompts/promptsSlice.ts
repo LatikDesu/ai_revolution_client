@@ -10,30 +10,25 @@ interface Prompt {
 }
 
 interface PromptsState {
-	systemprompts: Prompt[]
-	userprompts: Prompt[]
+	prompts: Prompt[]
 }
 
 const initialState: PromptsState = {
-	systemprompts: [],
-	userprompts: [],
+	prompts: [],
 }
 
 const promptsSlice = createSlice({
 	name: 'prompts',
 	initialState,
 	reducers: {
-		setSystemPrompts: (state, action: PayloadAction<{ results: Prompt[] }>) => {
-			state.systemprompts = action.payload.results
-		},
-		setUserPrompts: (state, action: PayloadAction<{ results: Prompt[] }>) => {
-			state.userprompts = action.payload.results
+		setPrompts: (state, action: PayloadAction<{ results: Prompt[] }>) => {
+			state.prompts = action.payload.results
 		},
 	},
 })
 
 export const selectPrompts = (state: RootState) => state.prompts
 
-export const { setSystemPrompts, setUserPrompts } = promptsSlice.actions
+export const { setPrompts } = promptsSlice.actions
 
 export default promptsSlice.reducer

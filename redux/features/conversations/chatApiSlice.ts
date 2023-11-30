@@ -6,7 +6,7 @@ interface Chat {
 	title: string
 	model: string
 	prompt: string
-	updated_at: string
+	updatedAt: string
 }
 
 interface ChatApiResponse {
@@ -20,9 +20,9 @@ interface Message {
 	id: UUID
 	conversation: UUID
 	content: string
-	is_from_user: boolean
-	in_reply_to: any
-	created_at: string
+	isFromUser: boolean
+	inReplyTo: any
+	createdAt: string
 }
 
 interface messagesListApiResponse {
@@ -30,9 +30,7 @@ interface messagesListApiResponse {
 	title: string
 	model: string
 	temperature: number
-	tokenLimit: number
 	maxLength: number
-	updated_at: string
 	prompt: string
 	messages: Message[]
 }
@@ -68,15 +66,17 @@ export const chatApiSlice = apiSlice.injectEndpoints({
 		}),
 		getMessageList: builder.query<messagesListApiResponse, { id: UUID | null }>(
 			{
-				query: ({ id }) => `/conversations/${id}/messages/`,
+				query: ({ id }) => `/conversations/${id}/messages/list/`,
+				providesTags: [{ type: 'CurrentChat', id: 'LIST' }],
 			}
 		),
 		sendMessage: builder.mutation({
-			query: ({ id, content, regenerate }) => ({
+			query: ({ id, content, stream }) => ({
 				url: `/conversations/${id}/messages/create/`,
 				method: 'POST',
-				body: { content, regenerate },
+				body: { content, stream },
 			}),
+			invalidatesTags: [{ type: 'CurrentChat', id: 'LIST' }],
 		}),
 	}),
 })

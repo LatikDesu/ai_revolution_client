@@ -1,15 +1,17 @@
 'use client'
 import { Loader, Message, MessageField } from '@/components/workspace/index'
 import { useGetMessageListQuery } from '@/redux/features/conversations/chatApiSlice'
-import { RootState } from '@/redux/store'
+import {
+	selectCurrentChat,
+	setCurrentChat,
+} from '@/redux/features/conversations/chatSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { UUID } from 'crypto'
-import { useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
+import isEqual from 'lodash/isEqual'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Chat({ id }: { id: UUID }) {
-	const componentUpdateCount = useSelector(
-		(state: RootState) => state.update.componentUpdateCount
-	)
+	const dispatch = useAppDispatch()
 
 	const {
 		data: messagesList,
@@ -17,21 +19,18 @@ export default function Chat({ id }: { id: UUID }) {
 		refetch,
 	} = useGetMessageListQuery({ id: id })
 
-	const messagesContainerRef = useRef<HTMLDivElement>(null)
+	const currentChat = useAppSelector(selectCurrentChat)
+
+	const [isInitialLoad, setInitialLoad] = useState(true)
 
 	useEffect(() => {
-		if (componentUpdateCount > 0) {
-			const fetchData = async () => {
-				await refetch()
-				if (messagesContainerRef.current) {
-					messagesContainerRef.current.scrollTop =
-						messagesContainerRef.current.scrollHeight
-				}
-			}
-
-			fetchData()
+		if (messagesList && !isEqual(messagesList, currentChat)) {
+			dispatch(setCurrentChat(messagesList))
 		}
-	}, [componentUpdateCount, refetch])
+		setInitialLoad(false)
+	}, [messagesList, dispatch, currentChat])
+
+	const messagesContainerRef = useRef<HTMLDivElement>(null)
 
 	return (
 		<div
@@ -46,7 +45,6 @@ export default function Chat({ id }: { id: UUID }) {
 				</div>
 			) : (
 				<>
-					{/* <ChatHeader title={messagesList?.title} /> */}
 					<div
 						ref={messagesContainerRef}
 						className='p-4 border-t border-darkgrey'
