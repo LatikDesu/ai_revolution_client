@@ -1,54 +1,66 @@
 'use client'
 
-import { useChatStream } from '@/hooks'
-import { IMessage, IStreamResponse } from '@/types/chat.types'
+import { useSaveMessageMutation } from '@/redux/features/conversations/chatApiSlice'
+import { IMessage } from '@/types/chat.types'
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { SSE } from 'sse'
 
 export default function Message({ message }: { message: IMessage }) {
 	const { id } = useParams()
-
-	const isActive = localStorage.getItem('isStreaming') === 'true'
-	const res = useChatStream(id as string, false)
-
-	const [streamData, setStreamData] = useState<IStreamResponse | null>(null)
-
+	const baseUrl = `${process.env.NEXT_PUBLIC_HOST}/api/v1`
 	const isSender = message.role === 'user'
 
+	let [isLoading, setIsLoading] = useState(false)
+	let [result, setResult] = useState('')
+	const [saveMessage] = useSaveMessageMutation()
+
+	const resultRef = useRef<string | null>(null)
+
 	useEffect(() => {
-		console.log(res)
-		if (!res.finish_reason || res.finish_reason !== 'stop') {
-			setStreamData(res)
-		}
-	}, [streamData, setStreamData, res])
+		resultRef.current = result
+	}, [result])
 
-	// const [streamResponse, setStreamResponse] = useState<IStreamResponse | null>(
-	// 	null
-	// )
+	let startStreaming = async () => {
+		setIsLoading(true)
+		setResult('')
 
-	// useEffect(() => {
-	// 	let isMounted = true
-	// 	const prevStreamResponse = localStorage.getItem('streamResponse')
+		let source = new SSE(`${baseUrl}/conversations/${id}/stream/`, {
+			withCredentials: true,
+		})
 
-	// 	const updateStreamResponse = () => {
-	// 		const newStreamResponse = localStorage.getItem('streamResponse')
+		source.addEventListener('message', (e: MessageEvent) => {
+			let payload = JSON.parse(e.data)
+			let text = payload.content
+			if (text !== null && text !== '\n') {
+				resultRef.current = (resultRef.current || '') + text
+				setResult(resultRef.current)
+			}
 
-	// 		if (isMounted && newStreamResponse !== prevStreamResponse) {
-	// 			setStreamResponse(JSON.parse(newStreamResponse as string))
-	// 		}
-	// 	}
+			if (payload.finish_reason) {
+				try {
+					saveMessage({
+						id,
+						content: resultRef.current,
+						role: 'assistant',
+					}).unwrap()
+				} catch (error) {
+					console.error('Error sending message:', error)
+				}
+				source.close()
+			}
+		})
 
-	// 	updateStreamResponse()
+		source.addEventListener('readystatechange', (e: any) => {
+			if (e.readyState >= 2) {
+				setIsLoading(false)
+			}
+		})
 
-	// 	window.addEventListener('storage', updateStreamResponse)
-
-	// 	return () => {
-	// 		isMounted = false
-	// 		window.removeEventListener('storage', updateStreamResponse)
-	// 	}
-	// }, [])
+		source.stream()
+	}
 
 	return (
 		<>
@@ -60,13 +72,27 @@ export default function Message({ message }: { message: IMessage }) {
 						isSender ? 'flex-row-reverse' : ''
 					}`}
 				>
-					<Image
-						src='/no-avatar.png'
-						alt='Avatar'
-						className='rounded-full'
-						width={50}
-						height={50}
-					/>
+					{isSender ? (
+						<div className='flex flex-col'>
+							<Image
+								src='/no-avatar.png'
+								alt='Avatar'
+								className='rounded-full'
+								width={50}
+								height={50}
+							/>
+							{isSender && <button onClick={startStreaming}>Stream</button>}
+						</div>
+					) : (
+						<Image
+							src='/no-avatar.png'
+							alt='Avatar'
+							className='rounded-full'
+							width={50}
+							height={50}
+						/>
+					)}
+
 					<div className={isSender ? 'mr-3' : 'ml-3'}>
 						<div
 							className={`text-sm text-white py-1.5 mt-4 px-3 rounded-2xl ${
@@ -87,7 +113,7 @@ export default function Message({ message }: { message: IMessage }) {
 					</div>
 				</div>
 			</div>
-			{<ExtraComponent streamResponse={streamData} />}
+			{isLoading && <ExtraComponent streamResponse={result} />}
 		</>
 	)
 }
@@ -105,7 +131,7 @@ const ExtraComponent = ({ streamResponse }: { streamResponse: any }) => {
 				/>
 				<div className='ml-3'>
 					<div className='text-sm text-white py-1.5 mt-4 px-3 rounded-2xl rounded-tl-none bg-grey'>
-						{streamResponse?.content}
+						{streamResponse}
 					</div>
 				</div>
 			</div>

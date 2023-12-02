@@ -1,7 +1,6 @@
 'use client'
 
 import { Field, Loader } from '@/components/workspace/index'
-import { useChatStream } from '@/hooks'
 import { useSaveMessageMutation } from '@/redux/features/conversations/chatApiSlice'
 import { ArrowRightToLine, Send } from 'lucide-react'
 import { useParams } from 'next/navigation'
@@ -9,9 +8,6 @@ import { useState } from 'react'
 
 export default function MessageField() {
 	const { id } = useParams()
-
-	const isActive = localStorage.getItem('isStreaming') === 'true'
-	useChatStream(id as string, isActive)
 
 	const [message, setMessage] = useState('')
 
@@ -23,8 +19,6 @@ export default function MessageField() {
 		try {
 			await saveMessage({ id, content: message, role: 'user' }).unwrap()
 			setMessage('')
-			localStorage.clear()
-			localStorage.setItem('isStreaming', 'true')
 		} catch (error) {
 			console.error('Error sending message:', error)
 		}
