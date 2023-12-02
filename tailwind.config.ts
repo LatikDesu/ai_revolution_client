@@ -47,6 +47,8 @@ const config: Config = {
 
 				light: '#f5f5f5',
 				primaryDark: '#58E6D9',
+
+				primary: '#EE881F',
 			},
 		},
 		screens: {

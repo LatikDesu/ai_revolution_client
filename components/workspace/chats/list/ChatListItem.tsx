@@ -13,8 +13,10 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import ButtonGroup from './ButtonGroup'
 
+import {IChatsList} from '@/types/chat.types'
+
 interface IChatListItem {
-	chat: IChat
+	chat: IChatsList
 }
 
 export default function ChatListItem({ chat }: IChatListItem) {

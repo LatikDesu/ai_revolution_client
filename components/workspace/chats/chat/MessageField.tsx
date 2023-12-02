@@ -1,32 +1,37 @@
 'use client'
 
 import { Field, Loader } from '@/components/workspace/index'
-import { useSendMessageMutation } from '@/redux/features/conversations/chatApiSlice'
-import { useAppDispatch } from '@/redux/hooks'
+import { useChatStream } from '@/hooks'
+import { useSaveMessageMutation } from '@/redux/features/conversations/chatApiSlice'
 import { ArrowRightToLine, Send } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 
 export default function MessageField() {
-	const dispatch = useAppDispatch()
-	const [message, setMessage] = useState('')
 	const { id } = useParams()
 
-	const [sendMessage, { isLoading }] = useSendMessageMutation()
+	const isActive = localStorage.getItem('isStreaming') === 'true'
+	useChatStream(id as string, isActive)
+
+	const [message, setMessage] = useState('')
+
+	const [saveMessage, { isLoading }] = useSaveMessageMutation()
 
 	const onSubmit = async () => {
 		if (!message || isLoading) return
 
 		try {
-			await sendMessage({ id, content: message, stream: false }).unwrap()
+			await saveMessage({ id, content: message, role: 'user' }).unwrap()
 			setMessage('')
+			localStorage.clear()
+			localStorage.setItem('isStreaming', 'true')
 		} catch (error) {
 			console.error('Error sending message:', error)
 		}
 	}
 
 	return (
-		<div className='border-t border-darkgrey p-4 flex items-center justify-between text-black'>
+		<div className='border-t border-darkgrey p-4 flex items-center justify-between text-white'>
 			<Field
 				placeholder='Write a message...'
 				Icon={ArrowRightToLine}

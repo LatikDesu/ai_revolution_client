@@ -12,29 +12,21 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function Chat({ id }: { id: UUID }) {
 	const dispatch = useAppDispatch()
-
-	const {
-		data: messagesList,
-		isLoading,
-		refetch,
-	} = useGetMessageListQuery({ id: id })
-
 	const currentChat = useAppSelector(selectCurrentChat)
 
-	const [isInitialLoad, setInitialLoad] = useState(true)
+	const { data: messagesList, isLoading } = useGetMessageListQuery({ id: id })
 
 	useEffect(() => {
 		if (messagesList && !isEqual(messagesList, currentChat)) {
 			dispatch(setCurrentChat(messagesList))
 		}
-		setInitialLoad(false)
 	}, [messagesList, dispatch, currentChat])
 
 	const messagesContainerRef = useRef<HTMLDivElement>(null)
 
 	return (
 		<div
-			className=' border-r border-darkgrey h-full grid bg-white'
+			className=' border-r border-darkgrey h-full grid bg-greyblue'
 			style={{
 				gridTemplateRows: isLoading ? '1fr .089fr' : '6fr .6fr',
 			}}

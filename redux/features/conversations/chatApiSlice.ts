@@ -1,47 +1,15 @@
 import { UUID } from 'crypto'
 import { apiSlice } from '../../services/apiSlice'
 
-interface Chat {
-	id: UUID
-	title: string
-	model: string
-	prompt: string
-	updatedAt: string
-}
-
-interface ChatApiResponse {
-	count: number
-	next: null | string
-	previous: null | string
-	results: Chat[]
-}
-
-interface Message {
-	id: UUID
-	conversation: UUID
-	content: string
-	isFromUser: boolean
-	inReplyTo: any
-	createdAt: string
-}
-
-interface messagesListApiResponse {
-	id: UUID
-	title: string
-	model: string
-	temperature: number
-	maxLength: number
-	prompt: string
-	messages: Message[]
-}
+import { IChat, IChatConfig, IChatsList } from '@/types/chat.types'
 
 export const chatApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getChatList: builder.query<ChatApiResponse, void>({
+		getChatList: builder.query<IChatsList[], void>({
 			query: () => '/conversations/',
 			providesTags: [{ type: 'Chat', id: 'LIST' }],
 		}),
-		createChat: builder.mutation<Chat, Partial<Chat>>({
+		createChat: builder.mutation<IChatsList, Partial<IChatsList>>({
 			query: (newChatData) => ({
 				url: '/conversations/',
 				method: 'POST',
@@ -56,7 +24,7 @@ export const chatApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: [{ type: 'Chat', id: 'LIST' }],
 		}),
-		configChat: builder.mutation<void, Partial<Chat>>({
+		configChat: builder.mutation<void, Partial<IChatConfig>>({
 			query: (config) => ({
 				url: `/conversations/${config.id}/config/`,
 				method: 'PATCH',
@@ -64,17 +32,22 @@ export const chatApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: [{ type: 'Chat', id: 'LIST' }],
 		}),
-		getMessageList: builder.query<messagesListApiResponse, { id: UUID | null }>(
-			{
-				query: ({ id }) => `/conversations/${id}/messages/list/`,
-				providesTags: [{ type: 'CurrentChat', id: 'LIST' }],
-			}
-		),
-		sendMessage: builder.mutation({
-			query: ({ id, content, stream }) => ({
+		getMessageList: builder.query<IChat, { id: UUID | null }>({
+			query: ({ id }) => `/conversations/${id}/messages/list/`,
+			providesTags: [{ type: 'CurrentChat', id: 'LIST' }],
+		}),
+		saveMessage: builder.mutation({
+			query: ({ id, content, role }) => ({
 				url: `/conversations/${id}/messages/create/`,
 				method: 'POST',
-				body: { content, stream },
+				body: { content, role },
+			}),
+			invalidatesTags: [{ type: 'CurrentChat', id: 'LIST' }],
+		}),
+		deleteMessage: builder.mutation({
+			query: ({ id, messageId }) => ({
+				url: `/conversations/${id}/${messageId}/delete/`,
+				method: 'DELETE',
 			}),
 			invalidatesTags: [{ type: 'CurrentChat', id: 'LIST' }],
 		}),
@@ -86,6 +59,7 @@ export const {
 	useCreateChatMutation,
 	useConfigChatMutation,
 	useDeleteChatMutation,
-	useSendMessageMutation,
+	useSaveMessageMutation,
+	useDeleteMessageMutation,
 	useGetMessageListQuery,
 } = chatApiSlice

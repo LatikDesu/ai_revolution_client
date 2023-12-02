@@ -27,8 +27,8 @@ export default function ChatsList() {
 	const [isInitialLoad, setInitialLoad] = useState(true)
 
 	useEffect(() => {
-		if (chatsList && !isEqual(chatsList.results, chats)) {
-			dispatch(getChatList(chatsList.results))
+		if (chatsList && !isEqual(chatsList, chats)) {
+			dispatch(getChatList(chatsList))
 		}
 		setInitialLoad(false)
 	}, [chatsList, dispatch, chats])
