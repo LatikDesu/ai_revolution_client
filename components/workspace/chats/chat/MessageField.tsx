@@ -19,6 +19,7 @@ export default function MessageField() {
 		try {
 			await saveMessage({ id, content: message, role: 'user' }).unwrap()
 			setMessage('')
+			localStorage.setItem('isStreaming', 'true')
 		} catch (error) {
 			console.error('Error sending message:', error)
 		}

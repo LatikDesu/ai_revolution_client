@@ -13,6 +13,16 @@ export default function Message({ message }: { message: IMessage }) {
 	const baseUrl = `${process.env.NEXT_PUBLIC_HOST}/api/v1`
 	const isSender = message.role === 'user'
 
+	useEffect(() => {
+		const isStreamingFromStorage =
+			localStorage.getItem('isStreaming') === 'true'
+
+		if (isStreamingFromStorage) {
+			localStorage.setItem('isStreaming', 'false')
+			startStreaming()
+		}
+	}, [])
+
 	let [isLoading, setIsLoading] = useState(false)
 	let [result, setResult] = useState('')
 	const [saveMessage] = useSaveMessageMutation()
@@ -81,7 +91,6 @@ export default function Message({ message }: { message: IMessage }) {
 								width={50}
 								height={50}
 							/>
-							{isSender && <button onClick={startStreaming}>Stream</button>}
 						</div>
 					) : (
 						<Image
