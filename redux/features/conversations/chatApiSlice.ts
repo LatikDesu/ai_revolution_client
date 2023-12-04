@@ -42,7 +42,10 @@ export const chatApiSlice = apiSlice.injectEndpoints({
 				method: 'POST',
 				body: { content, role },
 			}),
-			invalidatesTags: [{ type: 'CurrentChat', id: 'LIST' }],
+			invalidatesTags: [
+				{ type: 'CurrentChat', id: 'LIST' },
+				{ type: 'Chat', id: 'LIST' },
+			],
 		}),
 		deleteMessage: builder.mutation({
 			query: ({ id, messageId }) => ({
