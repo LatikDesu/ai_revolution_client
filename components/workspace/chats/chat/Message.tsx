@@ -6,6 +6,7 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 import { SSE } from 'sse'
 
 export default function Message({ message }: { message: IMessage }) {
@@ -110,7 +111,7 @@ export default function Message({ message }: { message: IMessage }) {
 									: 'rounded-tl-none bg-grey'
 							}`}
 						>
-							{message.content}
+							<ReactMarkdown>{message.content}</ReactMarkdown>
 						</div>
 						<div
 							className={`text-xs opacity-30 block mt-1.5 ${
@@ -140,7 +141,7 @@ const ExtraComponent = ({ streamResponse }: { streamResponse: any }) => {
 				/>
 				<div className='ml-3'>
 					<div className='text-sm text-white py-1.5 mt-4 px-3 rounded-2xl rounded-tl-none bg-grey'>
-						{streamResponse}
+						<ReactMarkdown>{streamResponse}</ReactMarkdown>
 					</div>
 				</div>
 			</div>
