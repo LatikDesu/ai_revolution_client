@@ -33,8 +33,10 @@ const config: Config = {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
 			colors: {
+				bgcolor: '#010815',
 				basecolor: '#001324',
 				basecyan: '#58E6D9',
+				basepink:'#f5088f',
 				basegrey: '#202121',
 				baseorange: '#EE881F',
 				dark: '#00040E',

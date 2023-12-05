@@ -10,7 +10,7 @@ export function Background() {
 	return (
 		<Image
 			alt='Mountains'
-			src='/background.png'
+			src='/bg3_upscale.jpg'
 			priority
 			quality={100}
 			fill
