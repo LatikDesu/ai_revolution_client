@@ -3,17 +3,12 @@ import Provider from '@/redux/provider'
 import '@/styles/globals.css'
 
 import type { Metadata, Viewport } from 'next'
-import { Bebas_Neue, Open_Sans } from 'next/font/google'
+import { Inter } from 'next/font/google'
 
-const openSans = Open_Sans({
+const inter = Inter({
 	subsets: ['latin'],
 	display: 'swap',
-	variable: '--font-open',
-})
-const bebaNeue = Bebas_Neue({
-	subsets: ['latin'],
-	weight: '400',
-	variable: '--font-beba',
+	variable: '--font-inter',
 })
 
 export const metadata: Metadata = {
@@ -22,8 +17,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-	themeColor: '#001324',
-	colorScheme: 'light',
+	themeColor: '#1e314c',
+	colorScheme: 'dark',
 }
 
 export default function RootLayout({
@@ -33,7 +28,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='ru'>
-			<body className={`${openSans.variable} ${bebaNeue.variable}`}>
+			<body className={`${inter.variable}`}>
 				<Provider>
 					<Setup />
 					{children}

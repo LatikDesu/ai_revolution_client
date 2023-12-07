@@ -1,6 +1,7 @@
 import { Layout, Navbar } from '@/components/screens/landing'
-import { AnimatedText, TransitionEffect } from '@/components/utils'
+import { TransitionEffect } from '@/components/utils'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -11,30 +12,47 @@ export const metadata: Metadata = {
 export default function Page() {
 	return (
 		<main
-			className='w-full min-h-full bg-bgcolor'
-			style={{ overflowY: 'auto', maxHeight: 'calc(100vh - 100px)' }}
+			className='absolute w-full min-h-full inline-block z-0 px-32 xl:p-24 lg:p-16 md:p-12 sm:p-8'
+			style={{
+				overflowY: 'auto',
+				maxHeight: 'calc(100vh - 100px)',
+			}}
 		>
+			<Image
+				src='/bg.webp'
+				alt='Background'
+				fill
+				priority
+				sizes='100vw'
+				style={{
+					objectFit: 'cover',
+				}}
+				className='-z-10'
+			/>
 			<TransitionEffect />
 			<Navbar />
-			<section className='flex items-center text-white w-full min-h-screen'>
+			<section className='flex items-center text-white w-full min-h-screen mx-auto'>
 				<Layout className='pt-0 md:pt-16 sm:pt-8'>
 					<div className='flex items-center justify-between w-full lg:flex-col'>
 						<div className='w-1/2 md:w-full'>
 							{/* <Image
 								width={600}
 								height={600}
-								src='/MainPic.png'
+								src='/MainPic1.png'
 								alt='PromoPic'
 								sizes='100vw'
 								className='w-full h-auto lg:hidden md:inline-block md:w-full'
 								priority
 							/> */}
 						</div>
-						<div className='w-1/2 flex flex-col items-start self-center lg:items-center lg:w-full lg:text-center'>
-							<AnimatedText
-								text='CREACRAFT ВАШ КРЕАТИВНЫЙ ПОМОЩНИК'
-								className='!text-6xl !text-left xl: !text-5xl !font-beba lg:!text-center lg:!text-6xl md:!text-5xl sm:!text-3xl text-textlight'
-							/>
+						<div
+							className='w-1/2 flex flex-col items-start self-center lg:items-center lg:w-full lg:text-center bg-bgcolor rounded-lg p-4
+						shadow-lg shadow-basecyan
+						'
+						>
+							<h1 className='!text-6xl !text-left xl: !text-5xl  lg:!text-center lg:!text-6xl md:!text-5xl sm:!text-3xl text-textlight'>
+								NIJI.AI
+							</h1>
 							<p className='my-4 text-base text-textlight font-medium md:text-sm sm:text-xs'>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit.
 								Distinctio pariatur et sint facilis sed rerum labore dolor

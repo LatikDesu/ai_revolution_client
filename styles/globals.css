@@ -2,10 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 html,
 body {
-	height: 100%;
-	font-family: var(--font-open);
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	overflow: hidden;
+	font-family: var(--font-inter);
+}
+
+section {
+	max-width: 1920px;
 }
 
 input:-webkit-autofill {

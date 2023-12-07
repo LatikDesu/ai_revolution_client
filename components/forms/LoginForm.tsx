@@ -8,19 +8,19 @@ export default function LoginForm() {
 
 	const config = [
 		{
-			labelText: 'Email address',
+			labelText: 'Адрес электронной почты',
 			labelId: 'email',
 			type: 'email',
 			value: email,
 			required: true,
 		},
 		{
-			labelText: 'Password',
+			labelText: 'Пароль',
 			labelId: 'password',
 			type: 'password',
 			value: password,
 			link: {
-				linkText: 'Забыли пароль?',
+				linkText: 'Востановить пароль',
 				linkUrl: '/password-reset',
 			},
 			required: true,

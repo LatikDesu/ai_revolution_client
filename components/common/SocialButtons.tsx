@@ -2,19 +2,21 @@
 
 import { SocialButton } from '@/components/common'
 import { continueWithGithub, continueWithGoogle, continueWithVK } from '@/utils'
-import { ImGithub, ImGoogle, ImVk } from 'react-icons/im'
+import { ImGoogle } from 'react-icons/im'
+import { SlSocialVkontakte } from 'react-icons/sl'
+import { TbBrandGithubFilled } from 'react-icons/tb'
 
 export default function SocialButtons() {
 	return (
-		<div className='flex justify-between items-center gap-2 mt-5'>
+		<div className='justify-center items-center gap-3 flex pt-4'>
 			<SocialButton provider='google' onClick={continueWithGoogle}>
-				<ImGoogle className='mr-3' /> Google
+				<ImGoogle size={24} className='' />
 			</SocialButton>
 			<SocialButton provider='vk' onClick={continueWithVK}>
-				<ImVk className='mr-3' /> ВКонтакте
+				<SlSocialVkontakte size={24} className='' />
 			</SocialButton>
 			<SocialButton provider='github' onClick={continueWithGithub}>
-				<ImGithub className='mr-3' /> Github
+				<TbBrandGithubFilled size={24} className='' />
 			</SocialButton>
 		</div>
 	)

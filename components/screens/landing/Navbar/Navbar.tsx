@@ -61,8 +61,7 @@ export default function Navbar() {
 
 	return (
 		<nav
-			className='w-full px-24 py-8 font-medium flex items-center justify-between
-	relative z-10 lg:px-16 md:px-12 sm:px-8
+			className='absolute top-0 left-0 w-full px-24 py-8 font-medium flex items-center justify-between z-10 lg:px-16 md:px-12 sm:px-8
 	'
 		>
 			<button

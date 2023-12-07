@@ -11,7 +11,6 @@ const config: Config = {
 		extend: {
 			fontFamily: {
 				sans: ['var(--font-open)'],
-				mono: ['var(--font-beba)'],
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -33,15 +32,26 @@ const config: Config = {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
 			colors: {
-				bgcolor: '#010815',
+				bgcolor: '#1e314c',
+				bgform: '#2F3442',
+
+				basepunk: '#F72585',
+				baseyellow: '#FFEE70',
+				baseviolet: '#7209B7',
+
+				textlight: '#F6F6F6',
+				texthover: '#4A7AFF',
+
+				button: '#4A7AFF',
+				buttonhover: '#668FFF',
+				buttonactive: '#878890',
+
 				basecolor: '#001324',
 				basecyan: '#58E6D9',
-				basepink:'#f5088f',
+				basepink: '#f5088f',
 				basegrey: '#202121',
 				baseorange: '#EE881F',
 				dark: '#00040E',
-
-				textlight: '#E0FFFE',
 
 				grey: '#7c7275',
 				greyblue: '#2E2D8C',
@@ -54,7 +64,7 @@ const config: Config = {
 			},
 		},
 		screens: {
-			'2xl': { max: '1440px' },
+			'2xl': { max: '1439px' },
 			// => @media (max-width: 1440px) { ... }
 
 			xl: { max: '1279px' },
