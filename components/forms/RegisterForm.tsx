@@ -16,31 +16,17 @@ export default function RegisterForm() {
 
 	const config = [
 		{
-			labelText: 'Username',
-			labelId: 'username',
-			type: 'text',
-			value: username,
-			required: true,
-		},
-		{
-			labelText: 'Email address',
+			labelText: 'Введите адрес электронной почты',
 			labelId: 'email',
 			type: 'email',
 			value: email,
 			required: true,
 		},
 		{
-			labelText: 'Password',
+			labelText: 'Придумайте пароль',
 			labelId: 'password',
 			type: 'password',
 			value: password,
-			required: true,
-		},
-		{
-			labelText: 'Confirm password',
-			labelId: 're_password',
-			type: 'password',
-			value: re_password,
 			required: true,
 		},
 	]

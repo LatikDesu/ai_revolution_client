@@ -4,22 +4,22 @@ import Link from 'next/link'
 
 export default function RegFormPage() {
 	return (
-		<div className='flex min-h-full flex-1 flex-col justify-center'>
+		<div className='flex min-h-full flex-1 flex-col justify-center mx-14'>
 			<div className=''>
-				<h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
+				<h2 className='mt-9 text-left text-3xl font-semibold leading-9 tracking-tight text-textlight'>
 					Регистрация
 				</h2>
 			</div>
 
-			<div className='mt-10 mx-auto'>
+			<div className='mt-3 mx-auto'>
 				<RegisterForm />
 				<SocialButtons />
 
-				<p className='mt-10 text-center text-sm text-gray-500'>
-					Уже есть аккаунт?{' '}
+				<p className='my-6 text-center text-sm text-textlight'>
+					Есть аккаунт?{' '}
 					<Link
 						href='/auth/login'
-						className='font-semibold leading-6 text-indigo-600 hover:text-indigo-500'
+						className=' text-textlight hover:text-texthover'
 					>
 						Войти
 					</Link>
