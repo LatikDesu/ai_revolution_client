@@ -20,7 +20,7 @@ export default function ChatListItem({ chat }: IChatListItem) {
 
 	const [editing, setEditing] = useState(false)
 
-	const isActive = usePathname() === `/workspace/chat/${chat.id}`
+	const isActive = usePathname() === `/conversations/chat/${chat.id}`
 
 	const [hovered, setHovered] = useState(false)
 
