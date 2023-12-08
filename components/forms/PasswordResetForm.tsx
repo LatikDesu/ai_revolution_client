@@ -8,7 +8,7 @@ export default function PasswordResetForm() {
 
 	const config = [
 		{
-			labelText: 'Email address',
+			labelText: 'Адрес электронной почты',
 			labelId: 'email',
 			type: 'email',
 			onChange,
@@ -21,7 +21,7 @@ export default function PasswordResetForm() {
 		<Form
 			config={config}
 			isLoading={isLoading}
-			btnText='Запросить сброс парполя'
+			btnText='Сбросить пароль'
 			onChange={onChange}
 			onSubmit={onSubmit}
 		/>

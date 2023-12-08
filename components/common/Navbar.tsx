@@ -1,21 +1,25 @@
 'use client'
 
-import { NavLink } from '@/components/common'
 import { useLogoutMutation } from '@/redux/features/authApiSlice'
 import { logout as setLogout } from '@/redux/features/authSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { Disclosure } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+import { useState } from 'react'
+import CustomLink from './CustomLink'
 
 export default function Navbar() {
-	const pathname = usePathname()
 	const dispatch = useAppDispatch()
 
 	const [logout] = useLogoutMutation()
 
 	const { isAuthenticated } = useAppSelector((state) => state.auth)
+	const [isOpen, setIsOpen] = useState(false)
+
+	const handleClick = () => {
+		setIsOpen(!isOpen)
+	}
 
 	const handleLogout = () => {
 		logout(undefined)
@@ -25,92 +29,81 @@ export default function Navbar() {
 			})
 	}
 
-	const isSelected = (path: string) => (pathname === path ? true : false)
-
 	const authLinks = (isMobile: boolean) => (
 		<>
-			<NavLink
-				isSelected={isSelected('/workspace')}
-				isMobile={isMobile}
+			<CustomLink
 				href='/workspace'
-			>
-				Рабочее пространство
-			</NavLink>
-			<NavLink
-				isSelected={isSelected('/dashboard')}
-				isMobile={isMobile}
-				href='/dashboard'
-			>
-				Личный кабинет
-			</NavLink>
-			<NavLink isMobile={isMobile} onClick={handleLogout}>
-				Выход
-			</NavLink>
+				title='Рабочее пространство'
+				className={isMobile ? '' : 'mr-8'}
+			/>
+			<CustomLink
+				title='Выход'
+				onClick={handleLogout}
+				className={isMobile ? '' : 'ml-10'}
+			/>
 		</>
 	)
 
 	const guestLinks = (isMobile: boolean) => (
 		<>
-			<NavLink
-				isSelected={isSelected('/auth/login')}
-				isMobile={isMobile}
+			<CustomLink
 				href='/auth/login'
-			>
-				Вход
-			</NavLink>
-			<NavLink
-				isSelected={isSelected('/auth/register')}
-				isMobile={isMobile}
+				title='Войти'
+				className={isMobile ? '' : 'mr-8'}
+			/>
+			<CustomLink
 				href='/auth/registration'
-			>
-				Регистрация
-			</NavLink>
+				title='Зарегистрироваться'
+				className={isMobile ? '' : 'ml-10'}
+			/>
 		</>
 	)
 
 	return (
-		<Disclosure as='nav' className='bg-greyblue'>
-			{({ open }) => (
-				<>
-					<div className='mx-auto  px-2 sm:px-6 lg:px-8 items-center justify-center'>
-						<div className='relative flex h-16 items-center justify-between'>
-							<div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
-								<Disclosure.Button className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
-									<span className='sr-only'>Open main menu</span>
-									{open ? (
-										<XMarkIcon className='block h-6 w-6' aria-hidden='true' />
-									) : (
-										<Bars3Icon className='block h-6 w-6' aria-hidden='true' />
-									)}
-								</Disclosure.Button>
-							</div>
-							<div className='flex flex-1 h-81 p-21 items-center justify-center sm:items-stretch sm:justify-start'>
-								<div className='flex flex-shrink-0 items-center justify-center font-extrabold '>
-									<NavLink href='/workspace' isBanner>
-										<Image
-											src='/CREACRAFT.svg'
-											alt='logo'
-											width={134}
-											height={30}
-										/>
-									</NavLink>
-								</div>
-								<div className='hidden  sm:block sm:ml-auto'>
-									<div className='flex space-x-4 '>
-										{isAuthenticated ? authLinks(false) : guestLinks(false)}
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+		<nav
+			className='absolute top-0 left-0 w-full px-24 py-8 font-medium flex items-center justify-between z-10 lg:px-16 md:px-12 sm:px-8
+	'
+		>
+			<button
+				className='flex flex-col justify-center items-center hidden lg:flex'
+				onClick={handleClick}
+			>
+				<span
+					className={`bg-basecyan block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm 
+			${isOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'}`}
+				></span>
+				<span
+					className={`bg-basecyan block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5
+			 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
+				></span>
+				<span
+					className={`bg-basecyan block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm
+			 ${isOpen ? '-rotate-45 -translate-y-1' : 'translate-y-0.5'}`}
+				></span>
+			</button>
 
-					<Disclosure.Panel className='sm:hidden'>
-						<div className='space-y-1 px-2 pb-3 pt-2'>
-							{isAuthenticated ? authLinks(true) : guestLinks(true)}
-						</div>
-					</Disclosure.Panel>
-				</>
-			)}
-		</Disclosure>
+			<div className='w-full flex justify-between items-center lg:hidden'>
+				<Link href='/'>
+					<Image src='/CREACRAFT.svg' alt='logo' width={134} height={30} />
+				</Link>
+				<nav className='flex items-center justify-center flex-wrap'>
+					{isAuthenticated ? authLinks(false) : guestLinks(false)}
+				</nav>
+			</div>
+
+			{isOpen ? (
+				<motion.div
+					initial={{ scale: 0, opacity: 0, x: '-50%', y: '-50%' }}
+					animate={{ scale: 1, opacity: 1 }}
+					className='min-w-[70vw] flex flex-col justify-between z-30 items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+            bg-basegrey rounded-lg backdrop-blur-md py-32
+            '
+				>
+					<nav className='flex items-center flex-col justify-center'>
+						{isAuthenticated ? authLinks(true) : guestLinks(true)}
+					</nav>
+				</motion.div>
+			) : null}
+		</nav>
 	)
 }

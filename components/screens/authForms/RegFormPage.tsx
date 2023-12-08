@@ -14,7 +14,6 @@ export default function RegFormPage() {
 			<div className='mt-3 mx-auto'>
 				<RegisterForm />
 				<SocialButtons />
-
 				<p className='my-6 text-center text-sm text-textlight'>
 					Есть аккаунт?{' '}
 					<Link

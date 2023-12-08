@@ -1,4 +1,5 @@
 import { PasswordResetConfirmForm } from '@/components/forms'
+import { FormsScreensLayout } from '@/components/screens/authForms'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -15,21 +16,18 @@ interface Props {
 
 export default function Page({ params: { uid, token } }: Props) {
 	return (
-		<div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
-			<div className='sm:mx-auto sm:w-full sm:max-w-sm'>
-				<img
-					className='mx-auto h-10 w-auto'
-					src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-					alt='AI Revolution'
-				/>
-				<h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
-					Введите новый пароль
-				</h2>
-			</div>
+		<FormsScreensLayout>
+			<div className='flex min-h-full flex-1 flex-col justify-center mx-14'>
+				<div className=''>
+					<h2 className='mt-9 text-left text-3xl font-semibold leading-9 tracking-tight text-textlight'>
+						Новый пароль
+					</h2>
+				</div>
 
-			<div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-				<PasswordResetConfirmForm uid={uid} token={token} />
+				<div className='mt-3 mx-auto py-6'>
+					<PasswordResetConfirmForm uid={uid} token={token} />
+				</div>
 			</div>
-		</div>
+		</FormsScreensLayout>
 	)
 }

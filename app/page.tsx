@@ -1,4 +1,4 @@
-import { Layout, Navbar } from '@/components/screens/landing'
+import { Navbar } from '@/components/common'
 import { TransitionEffect } from '@/components/utils'
 import type { Metadata } from 'next'
 import Image from 'next/image'
@@ -32,7 +32,7 @@ export default function Page() {
 			<TransitionEffect />
 			<Navbar />
 			<section className='flex items-center text-white w-full min-h-screen mx-auto'>
-				<Layout className='pt-0 md:pt-16 sm:pt-8'>
+				<div className='pt-0 md:pt-16 sm:pt-8'>
 					<div className='flex items-center justify-between w-full lg:flex-col'>
 						<div className='w-1/2 md:w-full'>
 							{/* <Image
@@ -71,7 +71,7 @@ export default function Page() {
 							</div>
 						</div>
 					</div>
-				</Layout>
+				</div>
 			</section>
 		</main>
 	)
