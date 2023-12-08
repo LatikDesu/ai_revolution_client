@@ -28,7 +28,7 @@ export default function MessageField() {
 	return (
 		<div className='absolute left-1/2 transform -translate-x-1/2 bottom-4 p-4 flex items-center justify-center w-3/4 text-white'>
 			<div className='w-full flex flex-col items-center justify-center'>
-				<div className='w-full flex items-center justify-center border rounded-lg border-textlight border-opacity-40 px-2'>
+				<div className='w-full flex items-center justify-center border rounded-lg border-textlight border-opacity-40 p-2'>
 					<Field
 						placeholder='Напишите Ваш запрос'
 						Icon={ArrowRightToLine}
@@ -39,11 +39,7 @@ export default function MessageField() {
 						}}
 						className='w-full'
 					/>
-					<button
-						onClick={onSubmit}
-						disabled={!message || isLoading}
-						className='hover:text-primary transition-colors pr-4'
-					>
+					<button onClick={onSubmit} disabled={!message || isLoading}>
 						{(isLoading && <Loader />) || (
 							<Send
 								size={24}

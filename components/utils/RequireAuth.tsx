@@ -1,6 +1,6 @@
 'use client'
 
-import { Loader } from '@/components/workspace/index'
+import { Loader } from '@/components/screens/conversations'
 import { useAppSelector } from '@/redux/hooks'
 import { redirect } from 'next/navigation'
 import styles from './RequireAuth.module.css'

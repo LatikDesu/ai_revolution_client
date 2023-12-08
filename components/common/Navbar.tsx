@@ -32,7 +32,7 @@ export default function Navbar() {
 	const authLinks = (isMobile: boolean) => (
 		<>
 			<CustomLink
-				href='/workspace'
+				href='/conversations'
 				title='Рабочее пространство'
 				className={isMobile ? '' : 'mr-8'}
 			/>

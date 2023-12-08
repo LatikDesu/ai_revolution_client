@@ -8,7 +8,7 @@ import {
 import { useLogoutMutation } from '@/redux/features/authApiSlice'
 import { logout as setLogout } from '@/redux/features/authSlice'
 
-import { ChatListItem, Loader } from '@/components/workspace/index'
+import { ChatListItem, Loader } from '@/components/screens/conversations'
 import {
 	addChat,
 	getChatList,

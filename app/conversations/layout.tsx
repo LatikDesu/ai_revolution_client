@@ -7,9 +7,5 @@ interface Props {
 }
 
 export default function Layout({ children }: Props) {
-	return (
-		<section>
-			<RequireAuth>{children}</RequireAuth>
-		</section>
-	)
+	return <RequireAuth>{children}</RequireAuth>
 }

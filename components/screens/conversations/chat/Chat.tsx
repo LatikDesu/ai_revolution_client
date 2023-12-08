@@ -1,5 +1,9 @@
 'use client'
-import { Loader, Message, MessageField } from '@/components/workspace/index'
+import {
+	Loader,
+	Message,
+	MessageField,
+} from '@/components/screens/conversations'
 import { useGetMessageListQuery } from '@/redux/features/conversations/chatApiSlice'
 import {
 	selectCurrentChat,

@@ -13,7 +13,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import ButtonGroup from './ButtonGroup'
 
-import {IChatsList} from '@/types/chat.types'
+import { IChatsList } from '@/types/chat.types'
 
 interface IChatListItem {
 	chat: IChatsList
@@ -25,7 +25,7 @@ export default function ChatListItem({ chat }: IChatListItem) {
 	const [editing, setEditing] = useState(false)
 	const [newTitle, setNewTitle] = useState(chat?.title)
 
-	const isActive = usePathname() === `/workspace/chat/${chat.id}`
+	const isActive = usePathname() === `/conversations/chat/${chat.id}`
 
 	const [hovered, setHovered] = useState(false)
 
