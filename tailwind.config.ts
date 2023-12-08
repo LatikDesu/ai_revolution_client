@@ -46,6 +46,9 @@ const config: Config = {
 				buttonhover: '#668FFF',
 				buttonactive: '#878890',
 
+				bgchatlist: '#15171E',
+				bgchatmessage: '#2F3442',
+
 				basecolor: '#001324',
 				basecyan: '#58E6D9',
 				basepink: '#f5088f',

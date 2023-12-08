@@ -2,7 +2,7 @@
 
 import { RequireAuth } from '@/components/utils'
 import { Sidebar } from '@/components/workspace'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient } from 'react-query'
 
 import styles from './Workspace.module.css'
 
@@ -16,10 +16,8 @@ export default function Layout({ children }: Props) {
 	return (
 		<section className={styles.layout}>
 			<RequireAuth>
-				<QueryClientProvider client={queryClient}>
-					<Sidebar />
-					<div>{children}</div>
-				</QueryClientProvider>
+				<Sidebar />
+				<div>{children}</div>
 			</RequireAuth>
 		</section>
 	)
