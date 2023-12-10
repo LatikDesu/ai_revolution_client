@@ -19,7 +19,7 @@ export default function Page() {
 			}}
 		>
 			<Image
-				src='/bg.webp'
+				src='/bg-xl.jpg'
 				alt='Background'
 				fill
 				priority

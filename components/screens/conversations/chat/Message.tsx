@@ -81,16 +81,16 @@ export default function Message({ message }: { message: IMessage }) {
 							src='/no-avatar.png'
 							alt='Avatar'
 							className='rounded-full'
-							width={50}
-							height={50}
+							width={60}
+							height={60}
 						/>
 					) : (
 						<Image
-							src='/MainPic1.png'
+							src='/AI-Avatar.png'
 							alt='Avatar'
 							className='rounded-full'
-							width={50}
-							height={50}
+							width={60}
+							height={60}
 						/>
 					)}
 
@@ -114,11 +114,11 @@ const ExtraComponent = ({ streamResponse }: { streamResponse: any }) => {
 		<div className='flex justify-start mb-4 px-10'>
 			<div className='relative flex items-start'>
 				<Image
-					src='/MainPic1.png'
+					src='/AI-Avatar.png'
 					alt='Avatar'
 					className='rounded-full'
-					width={50}
-					height={50}
+					width={60}
+					height={60}
 				/>
 				<div className='ml-6 flex flex-col'>
 					<p className='text-texthover text-semibold text-lg pb-2'>Ассистент</p>

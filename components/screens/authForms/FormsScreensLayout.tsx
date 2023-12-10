@@ -18,7 +18,7 @@ const FormsScreensLayout: FC<LayoutProps> = ({ children }) => {
 			}}
 		>
 			<Image
-				src='/bg.webp'
+				src='/bg-xl.jpg'
 				alt='Background'
 				fill
 				priority
