@@ -3,12 +3,13 @@
 import { useDeleteChatMutation } from '@/redux/features/conversations/chatApiSlice'
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
-import { MessageCircle, Trash2 } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import ButtonGroup from './ButtonGroup'
 
+import { Chat } from '@/components/common/Icons'
 import { IChatsList } from '@/types/chat.types'
 
 interface IChatListItem {
@@ -72,7 +73,7 @@ export default function ChatListItem({ chat }: IChatListItem) {
 		>
 			<div className='text-sm w-full'>
 				<div className='flex items-center'>
-					<MessageCircle className='mr-2' />
+					<Chat className='mr-2' />
 					<div className='flex'>{chat?.title}</div>
 					{/* {dayjs(chat?.updatedAt).calendar(null, {
 						sameDay: '[Сегодня в] HH:mm',

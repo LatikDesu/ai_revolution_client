@@ -8,6 +8,7 @@ import {
 import { useLogoutMutation } from '@/redux/features/authApiSlice'
 import { logout as setLogout } from '@/redux/features/authSlice'
 
+import { LogOut, Plus } from '@/components/common/Icons'
 import { ChatListItem, Loader } from '@/components/screens/conversations'
 import {
 	addChat,
@@ -16,7 +17,6 @@ import {
 } from '@/redux/features/conversations/chatSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import isEqual from 'lodash/isEqual'
-import { LogOut, PlusCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function ChatsList() {
@@ -71,7 +71,7 @@ export default function ChatsList() {
 					disabled={isCreateChatLoading}
 				>
 					Создать чат
-					<PlusCircle />
+					<Plus />
 				</button>
 			</div>
 			<div className='flex-1 overflow-y-auto pt-4'>
@@ -96,7 +96,7 @@ export default function ChatsList() {
 				onClick={handleLogout}
 				className='flex justify-start items-center py-10  text-textlight text-opacity-40 hover:text-opacity-100'
 			>
-				<LogOut size={27} />
+				<LogOut />
 				<div className='pl-4'>Выйти</div>
 			</button>
 		</div>

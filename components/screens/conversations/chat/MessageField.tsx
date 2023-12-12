@@ -1,8 +1,9 @@
 'use client'
 
+import { Send } from '@/components/common/Icons'
 import { Field, Loader } from '@/components/screens/conversations'
 import { useSaveMessageMutation } from '@/redux/features/conversations/chatApiSlice'
-import { ArrowRightToLine, Send } from 'lucide-react'
+import { ArrowRightToLine } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { useState } from 'react'
 
@@ -41,10 +42,7 @@ export default function MessageField() {
 					/>
 					<button onClick={onSubmit} disabled={!message || isLoading}>
 						{(isLoading && <Loader />) || (
-							<Send
-								size={24}
-								className='text-textlight text-opacity-40 hover:text-opacity-100'
-							/>
+							<Send className='text-textlight text-opacity-40 hover:text-opacity-100' />
 						)}
 					</button>
 				</div>

@@ -1,3 +1,4 @@
+import { Send } from '@/components/common/Icons'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -15,6 +16,8 @@ export default function Page() {
 				nesciunt magnam quibusdam necessitatibus dolorum velit. Quia illo autem
 				adipisci cupiditate. Repellendus!
 			</p>
+
+			<Send />
 		</div>
 	)
 }
