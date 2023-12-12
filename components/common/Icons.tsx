@@ -286,7 +286,6 @@ export const Send: React.FC<Props> = ({ className, ...rest }) => (
 		xmlns='http://www.w3.org/2000/svg'
 		width='1em'
 		height='1em'
-		fill='none'
 		{...rest}
 		className={`${className}`}
 	>
@@ -295,6 +294,11 @@ export const Send: React.FC<Props> = ({ className, ...rest }) => (
 			<path d='M5.647 16v-1.333h5.647V16H5.647ZM0 1.333V0h24v1.333H0ZM21.177 4h1.411v1.333h-1.412V4ZM19.765 5.333h1.412v1.334h-1.412V5.334ZM18.353 6.667h1.412V8h-1.412V6.667ZM16.941 8h1.412v1.333H16.94V8ZM15.53 9.334h1.411v1.333H15.53V9.334ZM14.118 10.666h1.411V12h-1.411v-1.334ZM12.706 12h1.412v1.333h-1.412V12ZM11.294 13.334h1.412v1.333h-1.412v-1.333Z' />
 			<path d='M9.882 14.666h1.412V16H9.882v-1.334ZM1.412 4h1.412v1.333H1.412V4ZM2.824 5.333h1.411v1.334H2.824V5.334ZM4.235 6.667h1.412V8H4.235V6.667Z' />
 		</g>
+		<defs>
+			<clipPath id='a'>
+				<path fill='#fff' d='M0 0h24v16H0z' />
+			</clipPath>
+		</defs>
 	</svg>
 )
 
