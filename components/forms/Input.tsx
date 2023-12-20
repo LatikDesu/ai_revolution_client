@@ -160,9 +160,9 @@ export default function Input({
 						}}
 					>
 						{isPasswordVisible ? (
-							<EyeOpen className='text-textlight text-opacity-40' />
+							<EyeOpen className='text-textlight text-opacity-100' />
 						) : (
-							<EyeClose className='text-textlight text-opacity-100' />
+							<EyeClose className='text-textlight text-opacity-40' />
 						)}
 					</button>
 				)}
