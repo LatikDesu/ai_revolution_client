@@ -17,6 +17,8 @@ export default function PasswordResetForm() {
 		},
 	]
 
+	const isButtonActive = email.trim() !== '' && !isLoading
+
 	return (
 		<Form
 			config={config}
@@ -24,6 +26,7 @@ export default function PasswordResetForm() {
 			btnText='Сбросить пароль'
 			onChange={onChange}
 			onSubmit={onSubmit}
+			isButtonActive={isButtonActive}
 		/>
 	)
 }

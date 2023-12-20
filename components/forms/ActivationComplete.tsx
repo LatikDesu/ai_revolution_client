@@ -24,6 +24,8 @@ export default function ActivationCompleteForm() {
 
 	const config: Config[] = []
 
+	const isButtonActive = email.trim() !== '' && !isLoading
+
 	return (
 		<Form
 			config={config}
@@ -31,6 +33,7 @@ export default function ActivationCompleteForm() {
 			btnText='Отправить повторно'
 			onChange={onChange}
 			onSubmit={onSubmit}
+			isButtonActive={isButtonActive}
 		/>
 	)
 }

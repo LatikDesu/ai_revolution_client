@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { EyeClose, EyeOpen } from '../common/Icons'
 
 interface Props {
 	labelId: string
@@ -12,6 +15,7 @@ interface Props {
 		linkUrl: string
 	}
 	required?: boolean
+	onValidationChange: (isValid: boolean) => void
 }
 
 export default function Input({
@@ -22,25 +26,146 @@ export default function Input({
 	children,
 	link,
 	required = false,
+	onValidationChange,
 }: Props) {
+	const [isHovered, setIsHovered] = useState(false)
+	const [isClicked, setIsClicked] = useState(false)
+	const [isValidEmail, setIsValidEmail] = useState(true)
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+	const [isEyeHovered, setIsEyeHovered] = useState(false)
+
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			const target = event.target as HTMLElement
+
+			if (!target.closest(`#${labelId}`)) {
+				validateEmail()
+				setIsHovered(false)
+				setIsClicked(false)
+			}
+		}
+
+		document.body.addEventListener('click', handleClickOutside)
+
+		return () => {
+			document.body.removeEventListener('click', handleClickOutside)
+		}
+	}, [labelId, value])
+
+	const isInputFilled = value.trim() !== ''
+
+	const validateEmail = () => {
+		if (type.toLowerCase() === 'password') {
+			setIsValidEmail(true)
+			onValidationChange(true)
+			return
+		}
+
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		const isValid = emailRegex.test(value)
+		setIsValidEmail(isValid)
+
+		if (!isValid) {
+			setIsClicked(false)
+			onValidationChange(false)
+		} else {
+			onValidationChange(true)
+		}
+	}
+
+	const togglePasswordVisibility = () => {
+		setIsPasswordVisible(!isPasswordVisible)
+	}
+
 	return (
 		<>
-			<div className='relative my-8 text-textlight border-b border-textlight border-opacity-50 '>
+			<div
+				className={`relative my-8 text-textlight border-b border-textlight border-opacity-50 ${
+					isHovered || isClicked ? 'hovered' : ''
+				}`}
+				onMouseEnter={() => setIsHovered(true)}
+				onMouseLeave={() => setIsHovered(false)}
+				onClick={() => {
+					setIsClicked(!isClicked)
+				}}
+				style={{
+					borderColor:
+						isValidEmail ||
+						value.trim() === '' ||
+						(isClicked && document.activeElement?.id === labelId)
+							? '#4A7AFF'
+							: '#F72E25',
+				}}
+			>
 				<label
 					htmlFor={labelId}
-					className='absolute top-50% left-1.5 translate-y-1/2 text-sm leading-6 font-normal brightness-50 pointer-events-none'
+					className={`absolute left-1.5 text-sm leading-6 font-normal pointer-events-none transition-transform ${
+						isClicked ? 'transform-translate' : ''
+					}`}
+					style={{
+						color:
+							(isHovered ||
+								isClicked ||
+								(typeof document !== 'undefined' &&
+									document.activeElement?.id === labelId &&
+									!isInputFilled)) &&
+							!isEyeHovered
+								? 'rgba(246, 246, 246, 0.7)'
+								: 'rgba(246, 246, 246, 0.4)',
+						fontSize: isClicked || isInputFilled ? '12px' : 'inherit',
+						transform: isClicked
+							? 'translateY(-20px)'
+							: isInputFilled
+							? 'translateY(-20px)'
+							: 'translateY(12px)',
+					}}
 				>
 					{children}
 				</label>
 				<input
 					id={labelId}
-					className='bg-transparent w-full text-sm leading-6 font-normal border-none outline-none focus:ring-0 '
+					className={`bg-transparent w-full text-sm leading-6 font-normal border-none outline-none focus:ring-0 ${
+						!isValidEmail ? 'border-red-500' : ''
+					}`}
 					name={labelId}
-					type={type}
-					onChange={onChange}
+					type={
+						type.toLowerCase() === 'password'
+							? isPasswordVisible
+								? 'text'
+								: 'password'
+							: type
+					}
+					onChange={(e) => {
+						onChange(e)
+					}}
 					value={value}
 					required={required}
 				/>
+				{type.toLowerCase() === 'password' && (
+					<button
+						type='button'
+						className='absolute right-1.5 top-1/2 transform -translate-y-1/2 cursor-pointer '
+						onClick={togglePasswordVisibility}
+						onMouseEnter={() => setIsEyeHovered(true)}
+						onMouseLeave={() => setIsEyeHovered(false)}
+						style={{
+							backgroundColor: isEyeHovered ? '#3F4657' : '',
+							borderRadius: '50%',
+							width: '25px',
+							height: '25px',
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							marginLeft: '20px',
+						}}
+					>
+						{isPasswordVisible ? (
+							<EyeOpen className='text-textlight text-opacity-40' />
+						) : (
+							<EyeClose className='text-textlight text-opacity-100' />
+						)}
+					</button>
+				)}
 			</div>
 			{link && (
 				<div className='text-sm'>
@@ -52,6 +177,18 @@ export default function Input({
 					</Link>
 				</div>
 			)}
+			<style jsx>{`
+				.hovered label {
+					color: rgba(246, 246, 246, 0.7);
+				}
+				.transform-translate {
+					transition: transform 0.3s ease-in-out;
+				}
+				.eye-icon {
+					width: 25px;
+					height: 25px;
+				}
+			`}</style>
 		</>
 	)
 }
