@@ -5,7 +5,7 @@ import { Field, Loader } from "@/components/screens/conversations";
 import { useSaveMessageMutation } from "@/redux/features/conversations/chatApiSlice";
 import { ArrowRightToLine } from "lucide-react";
 import { useParams } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, MouseEvent as ReactMouseEvent } from "react";
 
 export default function MessageField({ message, setMessage }: { message: string; setMessage: React.Dispatch<React.SetStateAction<string>> }) {
   const { id } = useParams();
@@ -15,19 +15,19 @@ export default function MessageField({ message, setMessage }: { message: string;
 
   const [saveMessage, { isLoading }] = useSaveMessageMutation();
 
-  const textareaRef = useRef(null);
+  const textareaRef = useRef<HTMLDivElement | null>(null);
+
+  const handleClickOutside = (event: ReactMouseEvent<Document>) => {
+    if (textareaRef.current && !textareaRef.current.contains(event.target as Node)) {
+      setIsClicked(false);
+    }
+  };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (textareaRef.current && !textareaRef.current.contains(event.target)) {
-        setIsClicked(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside as unknown as EventListener);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside as unknown as EventListener);
     };
   }, []);
 
@@ -44,7 +44,7 @@ export default function MessageField({ message, setMessage }: { message: string;
     }
   };
 
-  const handleTextareaChange = (e) => {
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const textarea = e.target;
     textarea.style.height = "auto";
     textarea.style.height = `${textarea.scrollHeight}px`;
@@ -54,13 +54,25 @@ export default function MessageField({ message, setMessage }: { message: string;
   const handleTextareaFocus = () => {
     setIsClicked(true);
     setIsHovered(true);
-    textareaRef.current.style.borderColor = "#4A7AFF";
+
+    const currentTextareaRef = textareaRef.current;
+
+    if (currentTextareaRef) {
+      const style = currentTextareaRef.style;
+      style.borderColor = "#4A7AFF";
+    }
   };
 
   const handleTextareaBlur = () => {
     setIsClicked(false);
     setIsHovered(false);
-    textareaRef.current.style.borderColor = "initial";
+
+    const currentTextareaRef = textareaRef.current;
+
+    if (currentTextareaRef) {
+      const style = currentTextareaRef.style;
+      style.borderColor = "initial";
+    }
   };
 
   const handleButtonMouseEnter = () => {

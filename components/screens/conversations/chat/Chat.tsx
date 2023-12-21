@@ -8,6 +8,7 @@ import { UUID } from "crypto";
 import isEqual from "lodash/isEqual";
 import { useEffect, useRef, useState } from "react";
 import Template from "./Template";
+import TemplateButton from "./TemplateButton";
 
 export default function Chat({ id }: { id: UUID }) {
   const dispatch = useAppDispatch();
@@ -28,15 +29,21 @@ export default function Chat({ id }: { id: UUID }) {
     setMessage((prevMessage) => prevMessage + templateText);
   };
 
+  const handleButtonClick = () => {
+    console.log("Button clicked!");
+  };
+
   return (
     <div className="relative w-full h-full bg-bgchatmessage" style={{ display: "flex", justifyContent: "center" }}>
+      {(messagesList?.messages?.length ?? 0) > 0 && <TemplateButton onClick={handleButtonClick} />}
+
       {isLoading ? (
         <div className="flex items-center justify-center">
           <Loader />
         </div>
       ) : (
         <>
-          {messagesList?.messages.length === 0 ? (
+          {(messagesList?.messages?.length ?? 0) === 0 ? (
             <div className="mb-4 w-4/5">
               <p className="text-texthover text-semibold text-lg pb-2" style={{ color: "#F6F6F6", fontSize: "32px", marginTop: "3%", marginBottom: "3%" }}>
                 Шаблоны
@@ -51,7 +58,7 @@ export default function Chat({ id }: { id: UUID }) {
             </div>
           ) : (
             <div ref={messagesContainerRef} className="p-4 border-t border-darkgrey" style={{ overflowY: "auto", maxHeight: "calc(100vh - 260px)", width: "85%" }}>
-              {messagesList?.messages.map((message) => (
+              {messagesList?.messages?.map((message) => (
                 <Message key={message.id} message={message} />
               ))}
             </div>
@@ -60,6 +67,7 @@ export default function Chat({ id }: { id: UUID }) {
       )}
 
       <MessageField message={message} setMessage={setMessage} />
+
       <style jsx>{`
         ::-webkit-scrollbar {
           width: 5px;
