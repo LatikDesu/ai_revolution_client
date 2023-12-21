@@ -75,7 +75,7 @@ export default function Message({ message }: { message: IMessage }) {
 	return (
 		<>
 			<div className='flex justify-start mb-4 px-10'>
-				<div className='relative flex items-start'>
+				<div className='relative flex items-start pt-8'>
 					{isSender ? (
 						<Image
 							src='/no-avatar.png'
@@ -95,7 +95,7 @@ export default function Message({ message }: { message: IMessage }) {
 					)}
 
 					<div className='ml-6 flex flex-col'>
-						<p className='text-texthover text-semibold text-lg pb-2'>
+						<p className='text-texthover font-bold text-xl pb-2'>
 							{isSender ? 'Ты' : 'Ассистент'}
 						</p>
 						<div className='text-sm text-textlight '>
@@ -121,7 +121,7 @@ const ExtraComponent = ({ streamResponse }: { streamResponse: any }) => {
 					height={60}
 				/>
 				<div className='ml-6 flex flex-col'>
-					<p className='text-texthover text-semibold text-lg pb-2'>Ассистент</p>
+					<p className='text-texthover font-bold text-xl pb-2'>Ассистент</p>
 					<div className='text-sm text-textlight '>
 						<ReactMarkdown>{streamResponse}</ReactMarkdown>
 					</div>

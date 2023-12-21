@@ -17,6 +17,7 @@ import {
 } from '@/redux/features/conversations/chatSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import isEqual from 'lodash/isEqual'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 export default function ChatsList() {
@@ -58,7 +59,7 @@ export default function ChatsList() {
 	return (
 		<div className='h-screen flex flex-col px-6'>
 			<div className='py-8'>
-				<p className='text-textlight font-bold'>PLACE FOR LOGO</p>
+				<Image src='/Logo.svg' alt='logo' width={134} height={30} />
 			</div>
 			<div
 				className='px-4 py-2.5 rounded-xl border border-textlight border-opacity-40  text-textlight text-opacity-40 justify-between items-center inline-flex
@@ -83,8 +84,8 @@ export default function ChatsList() {
 					chats.map((chat) => <ChatListItem key={chat.id} chat={chat} />)
 				) : (
 					<div className='flex flex-col items-center justify-center h-full text-center'>
-						<div className='rounded-full bg-textlight p-10 m-4' />
-						<p>Здесь будут отображаться созданные чаты</p>
+						<Image src='/AI-Avatar.png' alt='logo' width={64} height={64} />
+						<p className='pt-4'>Здесь будут отображаться созданные чаты</p>
 					</div>
 				)}
 			</div>

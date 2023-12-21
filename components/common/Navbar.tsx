@@ -84,7 +84,7 @@ export default function Navbar() {
 
 			<div className='w-full flex justify-between items-center lg:hidden'>
 				<Link href='/'>
-					<Image src='/CREACRAFT.svg' alt='logo' width={134} height={30} />
+					<Image src='/Logo.svg' alt='logo' width={134} height={30} />
 				</Link>
 				<nav className='flex items-center justify-center flex-wrap'>
 					{isAuthenticated ? authLinks(false) : guestLinks(false)}

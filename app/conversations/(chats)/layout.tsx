@@ -10,7 +10,7 @@ export default function ChatLayout({ children }: PropsWithChildren<unknown>) {
 				gridTemplateColumns: '20% auto',
 			}}
 		>
-			<div className=''>
+			<div className="bg-[url('/bgChats.png')] bg-auto bg-center bg-no-repeat">
 				<ChatsList />
 			</div>
 			{children}
