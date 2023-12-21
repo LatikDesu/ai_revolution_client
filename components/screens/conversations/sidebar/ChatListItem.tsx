@@ -64,7 +64,7 @@ export default function ChatListItem({ chat }: IChatListItem) {
 	return (
 		<Link
 			href={`/conversations/chat/${chat.id}`}
-			className={`py-4 flex items-center duration-300 ease-linear transition-colors
+			className={`px-1 py-4 flex items-center duration-300 ease-linear transition-colors
 			rounded-lg cursor-pointer hover:bg-bgchatmessage animation-slide-fade ${
 				isActive ? 'bg-bgchatmessage' : ''
 			}`}
