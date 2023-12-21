@@ -4,7 +4,7 @@ import { useSaveMessageMutation } from "@/redux/features/conversations/chatApiSl
 import { IMessage } from "@/types/chat.types";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import { SSE } from "sse";
 
@@ -13,17 +13,8 @@ export default function Message({ message }: { message: IMessage }) {
   const baseUrl = `${process.env.NEXT_PUBLIC_HOST}/api/v1`;
   const isSender = message.role === "user";
 
-  useEffect(() => {
-    const isStreamingFromStorage = localStorage.getItem("isStreaming") === "true";
-
-    if (isStreamingFromStorage) {
-      localStorage.setItem("isStreaming", "false");
-      startStreaming();
-    }
-  }, []);
-
-  let [isLoading, setIsLoading] = useState(false);
-  let [result, setResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState("");
   const [saveMessage] = useSaveMessageMutation();
 
   const resultRef = useRef<string | null>(null);
@@ -32,44 +23,53 @@ export default function Message({ message }: { message: IMessage }) {
     resultRef.current = result;
   }, [result]);
 
-  let startStreaming = async () => {
-    setIsLoading(true);
-    setResult("");
+  useEffect(() => {
+    const isStreamingFromStorage = localStorage.getItem("isStreaming") === "true";
 
-    let source = new SSE(`${baseUrl}/conversations/${id}/stream/`, {
-      withCredentials: true,
-    });
+    const startStreaming = async () => {
+      setIsLoading(true);
+      setResult("");
 
-    source.addEventListener("message", (e: MessageEvent) => {
-      let payload = JSON.parse(e.data);
-      let text = payload.content;
-      if (text !== null && text !== "\n") {
-        resultRef.current = (resultRef.current || "") + text;
-        setResult(resultRef.current);
-      }
+      let source = new SSE(`${baseUrl}/conversations/${id}/stream/`, {
+        withCredentials: true,
+      });
 
-      if (payload.finish_reason) {
-        try {
-          saveMessage({
-            id,
-            content: resultRef.current,
-            role: "assistant",
-          }).unwrap();
-        } catch (error) {
-          console.error("Error sending message:", error);
+      source.addEventListener("message", (e: MessageEvent) => {
+        let payload = JSON.parse(e.data);
+        let text = payload.content;
+        if (text !== null && text !== "\n") {
+          resultRef.current = (resultRef.current || "") + text;
+          setResult(resultRef.current);
         }
-        source.close();
-      }
-    });
 
-    source.addEventListener("readystatechange", (e: any) => {
-      if (e.readyState >= 2) {
-        setIsLoading(false);
-      }
-    });
+        if (payload.finish_reason) {
+          try {
+            saveMessage({
+              id,
+              content: resultRef.current,
+              role: "assistant",
+            }).unwrap();
+          } catch (error) {
+            console.error("Error sending message:", error);
+          }
+          source.close();
+        }
+      });
 
-    source.stream();
-  };
+      source.addEventListener("readystatechange", (e: any) => {
+        if (e.readyState >= 2) {
+          setIsLoading(false);
+        }
+      });
+
+      source.stream();
+    };
+
+    if (isStreamingFromStorage) {
+      localStorage.setItem("isStreaming", "false");
+      startStreaming();
+    }
+  }, [id, baseUrl, result, saveMessage]);
 
   return (
     <>
