@@ -41,7 +41,7 @@ export default function Chat({ id }: { id: UUID }) {
               <p className="text-texthover text-semibold text-lg pb-2" style={{ color: "#F6F6F6", fontSize: "32px", marginTop: "3%", marginBottom: "3%" }}>
                 Шаблоны
               </p>
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap " style={{ maxWidth: "730px" }}>
                 {[...Array(5)].map((_, index) => (
                   <div key={index} className="w-1/2 mb-4 pr-2" style={{ maxWidth: "50%", flexBasis: "50%", boxSizing: "border-box", maxHeight: "111px", marginLeft: 0 }}>
                     <Template onClickTemplate={handleTemplateClick} templateText="Lorem ipsum dolor sit amet consectetur. Convallis risus arcu id accumsan massa sapien" />
